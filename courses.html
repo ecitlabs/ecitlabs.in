@@ -1,0 +1,168 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Courses | ECIT</title>
+<script>
+/* ECIT section shim: lets this file run inside the ECIT site frame (index.html) with the shared header.
+   Opened on its own, it sends the visitor to the full site. */
+(function(){
+ if(window.parent===window){location.replace('index.html#courses');return}
+ var q=/[?&]d=(semi|comm)/.exec(location.search),de=document.documentElement;
+ var E=window.ECIT={domain:q?q[1]:'semi',_l:[],onDomain:function(fn){this._l.push(fn);try{fn(this.domain)}catch(err){console.error(err)}}};
+ de.setAttribute('data-domain',E.domain);
+ function post(m){try{parent.postMessage(m,'*')}catch(err){}}
+ window.addEventListener('message',function(e){var m=e.data;if(!m||m.ecit!=='domain'||(m.domain!=='semi'&&m.domain!=='comm')||m.domain===E.domain)return;
+  E.domain=m.domain;de.setAttribute('data-domain',m.domain);E._l.forEach(function(fn){try{fn(m.domain)}catch(err){console.error(err)}})});
+ var last=0;
+ function size(){var h=Math.ceil(document.body.getBoundingClientRect().height);if(h&&h!==last){last=h;post({ecit:'height',h:h})}}
+ window.addEventListener('load',function(){size();post({ecit:'ready'})});
+ window.addEventListener('resize',size);
+ document.addEventListener('DOMContentLoaded',function(){
+  if(window.ResizeObserver)new ResizeObserver(size).observe(document.body);else setInterval(size,400);
+  size();
+ });
+ document.addEventListener('pointerdown',function(){post({ecit:'tap'})},true);
+ document.addEventListener('click',function(e){var a=e.target.closest&&e.target.closest('a[href^="#"]');if(!a)return;e.preventDefault();post({ecit:'link',href:a.getAttribute('href')})});
+})();
+</script>
+<style>
+/* Page basics shared with the ECIT shell, so this section looks the same inside the site frame. */
+:root{--ink:#171A1E;--red:#A90025;--white:#fff;--soft:#F3F4F5;--gray:#777;--serif:Georgia,"Times New Roman",serif;--sans:"Helvetica Neue",Arial,sans-serif;--s1:8px;--s2:16px;--s3:24px;--s4:48px;--s5:96px;--max:1240px}
+*{box-sizing:border-box;margin:0}
+html{-webkit-text-size-adjust:100%}
+body{overflow-wrap:break-word;font-family:var(--sans);color:var(--ink);line-height:1.6;background:var(--white)}
+img{display:block;width:100%;height:100%;object-fit:cover;background:#2a2f36}
+a{color:inherit;text-decoration:none}
+:focus-visible{outline:3px solid var(--red);outline-offset:2px}
+.wrap{max-width:var(--max);margin:0 auto;padding:0 var(--s3)}
+h1,h2,h3{font-family:var(--serif);font-weight:400;line-height:1.15}
+h2{font-size:clamp(2rem,4vw,3rem);margin-bottom:var(--s3)}
+.lead{max-width:62ch;color:#454a52;font-size:1.1rem}
+.btn{display:inline-block;padding:14px 26px;font-weight:600;border:2px solid var(--red);background:var(--red);color:#fff;cursor:pointer;font:inherit;font-weight:600;transition:background .2s,color .2s}
+.btn:hover{background:#fff;color:var(--red)}
+.more{color:var(--red);font-weight:600;border-bottom:2px solid transparent}
+.more:hover{border-color:var(--red)}
+/* Same desktop density as the ECIT shell (15px root on wide screens), so text sizes match the original site. */
+@media(min-width:1101px){
+ html{font-size:15px}
+ :root{--s5:64px;--max:1400px}
+ .lead{font-size:1rem}
+ h2{font-size:clamp(1.8rem,2.6vw,2.5rem);margin-bottom:var(--s2)}
+ .btn{padding:12px 22px}
+}
+/* The site frame sizes itself to this content, so sections must not fill the viewport. */
+section[class$="-view"]{display:block!important;min-height:0!important}
+</style>
+<style>
+.course-view{min-height:calc(100vh - 78px);padding:58px max(24px,calc((100% - 1240px)/2)) 80px;background:#fff}
+.course-view .eyebrow{font-size:12px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#A90025}
+.course-view h1{font:400 clamp(2rem,4vw,3rem) Georgia,serif;margin:8px 0 12px}
+.course-view .intro{max-width:760px;color:#555;margin-bottom:28px}
+.course-view .toolbar{display:flex;flex-direction:column;gap:16px;margin-bottom:26px}
+.course-view .filters{display:flex;flex-wrap:wrap;gap:8px}
+.course-view .filters button{border:1px solid #d4d7da;background:#fff;padding:8px 14px;cursor:pointer;font:inherit}
+.course-view .filters button.active,.course-view .filters button:hover{background:#171A1E;color:#fff}
+.course-view input{max-width:420px;width:100%;padding:12px 14px;border:1px solid #c8cbd0;font:inherit}
+.course-view .grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:22px}
+.course-view .card{position:relative;display:flex;flex-direction:column;min-width:0;border:1px solid #e1e4e8;border-radius:16px;padding:0;background:#fff;overflow:hidden;box-shadow:0 5px 18px rgba(20,28,38,.045);transition:transform .22s ease,box-shadow .22s ease,border-color .22s ease}
+.course-view .card:hover{transform:translateY(-4px);border-color:#c9cdd3;box-shadow:0 14px 32px rgba(20,28,38,.11)}
+.course-view .thumb{--accent:#a90025;position:relative;isolation:isolate;display:flex;align-items:flex-end;justify-content:space-between;min-height:150px;padding:18px 20px;color:#fff;background:linear-gradient(135deg,#20242b 0%,#343943 100%);overflow:hidden}
+.course-view .thumb:before,.course-view .thumb:after{content:"";position:absolute;z-index:-1;border:1px solid rgba(255,255,255,.2);border-radius:50%}
+.course-view .thumb:before{width:190px;height:190px;right:-34px;top:-88px;box-shadow:0 0 0 18px rgba(255,255,255,.035),0 0 0 38px rgba(255,255,255,.025)}
+.course-view .thumb:after{width:90px;height:90px;right:42px;top:24px;background:radial-gradient(circle at 35% 35%,var(--accent),transparent 72%);opacity:.9}
+.course-view .thumb-grid{position:absolute;inset:0;z-index:-1;opacity:.16;background-image:linear-gradient(rgba(255,255,255,.35) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.35) 1px,transparent 1px);background-size:24px 24px;mask-image:linear-gradient(90deg,#000,transparent 85%)}
+.course-view .thumb-code{font:700 38px/1 Arial,sans-serif;letter-spacing:-.07em;color:#fff}
+.course-view .thumb-domain{font-size:10px;letter-spacing:.15em;text-transform:uppercase;color:rgba(255,255,255,.78);font-weight:700;margin-bottom:9px}
+.course-view .thumb-mark{position:absolute;right:22px;bottom:22px;width:42px;height:42px;border:1px solid rgba(255,255,255,.35);border-radius:12px;display:grid;place-items:center;background:rgba(255,255,255,.08)}
+.course-view .thumb-mark svg{width:22px;height:22px;stroke:#fff;fill:none;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
+.course-view .card-body{padding:20px 21px 16px;display:flex;flex-direction:column;flex:1}
+.course-view .tag{display:inline-flex;align-self:flex-start;font-size:10px;text-transform:uppercase;letter-spacing:.1em;color:#9b0022;font-weight:700;background:#fff2f4;border:1px solid #f4d8de;border-radius:999px;padding:5px 9px}
+.course-view .card h2{font:650 19px/1.3 Arial,sans-serif;letter-spacing:-.025em;margin:12px 0 9px;color:#171a1e}
+.course-view .card p{font-size:13px;line-height:1.6;color:#5b6068;margin-bottom:14px}
+.course-view .card ul{padding-left:17px;font-size:12px;line-height:1.65;color:#454a52;margin-bottom:16px}
+.course-view .card ul li{padding-left:2px;margin:2px 0}
+.course-view .course-path-note{font-size:11px;color:#777;margin-top:auto;padding-top:2px}
+.course-view .card-footer{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:15px 20px 18px;border-top:1px solid #eceef0;background:#fcfcfd}
+.course-view .fee-label{display:block;font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:#777;font-weight:700;margin-bottom:3px}
+.course-view .fee-value{font-size:19px;font-weight:750;letter-spacing:-.03em;color:#171a1e;white-space:nowrap}
+.course-view .enrol-btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:10px 14px;border-radius:9px;background:#a90025;color:#fff;font-size:12px;font-weight:700;white-space:nowrap;transition:background .2s ease,transform .2s ease}
+.course-view .enrol-btn:hover{background:#85001d;transform:translateY(-1px)}
+.course-view .enrol-btn svg{width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+@media(max-width:900px){.course-view .grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:600px){.course-view .grid{grid-template-columns:1fr}.course-view .card-footer{padding:14px 17px}.course-view .thumb{min-height:138px}}
+</style>
+</head>
+<body>
+<section class="course-view" id="coursesView">
+<div class="eyebrow">ECIT Academics</div><h1>Explore courses</h1>
+<p class="intro" id="courseIntro">Build a strong foundation in semiconductor devices, digital design, verification, and VLSI implementation through structured technical courses.</p>
+<div class="toolbar"><div class="filters" id="filters"><button class="active" data-filter="all">All courses</button><button data-filter="Digital Design">Digital Design</button><button data-filter="Verification">Verification</button><button data-filter="Physical Design">Physical Design</button><button data-filter="Devices">Devices</button></div><input class="search" id="courseSearch" type="search" placeholder="Search courses..." aria-label="Search courses"></div>
+<div class="grid" id="courseGrid"></div><p class="empty" id="courseEmpty">No courses match this search.</p>
+</section>
+<script>
+(function(){
+const data={
+semi:[
+['RTL Design','Digital Design','Learn synthesizable Verilog, finite-state machines, datapaths, pipelining, and RTL design practices.',['Verilog HDL from Scratch','Advanced RTL Design with Verilog']],
+['SystemVerilog','Verification','Explore SystemVerilog data types, interfaces, classes, and assertion-based verification.',['SystemVerilog Programming','Advanced SystemVerilog and Assertions']],
+['Design Verification','Verification','Develop testbenches, functional coverage, and scalable UVM verification environments.',['Functional Verification Fundamentals','UVM Advanced Verification']],
+['Physical Design','Physical Design','Understand the implementation flow from floorplanning through signoff and static timing analysis.',['Physical Design: RTL to Tapeout','Static Timing Analysis']],
+['Analog IC Design','Devices','Study circuit simulation and the analog building blocks used inside integrated circuits.',['LTspice and SPICE Circuit Simulation','Op-Amp and PLL Fundamentals']],
+['Semiconductor Technology','Devices','Build knowledge of semiconductor devices, CMOS technology, and power-aware design.',['Semiconductor Devices and CMOS Fundamentals','Low Power VLSI Design with UPF']],
+['VLSI Projects','Digital Design','Apply design concepts in guided projects from specification to FPGA implementation.',['VLSI Fundamentals Project: RTL to FPGA','Tapeout-Ready VLSI Capstone']],
+['VLSI Design and Verification','Verification','Build a digital design workflow from logic fundamentals through RTL and functional verification.',['Digital electronics','Verilog HDL','SystemVerilog','RTL design and FSMs','Assertions and functional coverage','UVM fundamentals','Integrated design project']],
+['Physical Design and RTL-to-GDSII','Physical Design','Study the implementation flow from synthesized RTL to physical signoff.',['CMOS and timing fundamentals','Logic synthesis','Floorplanning','Placement and clock-tree synthesis','Routing','Static timing analysis','Physical-design project']],
+['Semiconductor Devices and Fabrication','Devices','Connect semiconductor device physics with CMOS technology and fabrication processes.',['Semiconductor physics','PN junctions','MOSFET operation','CMOS process flow','Lithography and deposition','Device characterization','Technology study project']],
+['Computer Architecture and RISC-V','Digital Design','Explore processor architecture and implement core concepts using the RISC-V instruction set.',['Digital logic','Computer organization','RISC-V ISA','Pipelining','Memory hierarchy','Processor datapath and control','RISC-V implementation project']]
+],
+comm:[
+['Wireless Communication','Wireless','Study wireless channels, fading, MIMO, OFDM, and digital modulation and coding.',['Wireless Channels and Fading','Digital Modulation and Coding']],
+['Digital Signal Processing','Signal Processing','Analyze discrete-time signals and systems, digital filters, and adaptive estimation.',['Discrete-Time Signals and Systems','Adaptive Filtering']],
+['RF and Microwave Engineering','RF & Antennas','Learn transmission lines, RF circuits, and microwave engineering fundamentals.',['RF Circuit Design Basics','Microwave Engineering']],
+['Antenna Design','RF & Antennas','Study antenna theory, arrays, simulation methods, and measurement techniques.',['Antenna Theory and Arrays','Antenna Simulation and Measurement']],
+['HF/VHF Communication','Wireless','Explore ionospheric propagation, HF skywave links, VHF/UHF systems, and link design.',['Ionospheric Propagation and HF Links','VHF/UHF Link Budgeting']],
+['5G/6G','Wireless','Understand the 5G NR physical layer and emerging learning-based 6G communication methods.',['5G NR Physical Layer','Learning-Based 6G Communications']],
+['Communication Systems','Signal Processing','Connect analog and digital communication theory with practical software-defined radio systems.',['Analog and Digital Communication','Software-Defined Radio Lab']],
+['Wireless Communication Systems','Wireless','Build a foundation in communication theory and modern multi-antenna wireless systems.',['Signals and systems','Probability and random processes','Digital modulation and coding','Wireless channel models','MIMO and OFDM','Link-level simulation','Wireless systems project']],
+['5G and 6G Wireless Networks','Wireless','Study cellular radio technologies and emerging research directions in next-generation networks.',['Wireless fundamentals','LTE and 5G NR overview','5G NR physical layer','Massive MIMO and beamforming','Network architecture','Learning-based 6G concepts','Network simulation project']],
+['HF and Ionospheric Communication','Wireless','Understand skywave propagation and adaptive HF link design under changing ionospheric conditions.',['HF propagation fundamentals','Ionosphere and TEC','MUF and frequency management','HF channel sounding','Link-quality estimation','Adaptive frequency selection','Resilient HF link project']],
+['Software-Defined Radio and Signal Processing','Signal Processing','Combine DSP concepts with practical radio implementation and measurement.',['Discrete-time signals','Digital filters','Modulation and demodulation','GNU Radio fundamentals','SDR transmitter and receiver','Channel estimation','SDR experiment']]
+]};
+var E=window.ECIT,root=document.getElementById('coursesView');
+var grid=root.querySelector('#courseGrid'),search=root.querySelector('#courseSearch'),filtersEl=root.querySelector('#filters'),empty=root.querySelector('#courseEmpty'),intro=root.querySelector('#courseIntro');
+var FILTERS={semi:['all','Digital Design','Verification','Physical Design','Devices'],comm:['all','Wireless','Signal Processing','RF & Antennas']};
+var INTRO={semi:'Build a strong foundation in semiconductor devices, digital design, verification, and VLSI implementation through structured technical courses.',comm:'Explore communication systems from signal processing and antennas to ionospheric HF links and next-generation wireless networks.'};
+var domain=E.domain,filter='all';
+function drawFilters(){filtersEl.innerHTML=FILTERS[domain].map(function(x,i){return '<button type="button" data-filter="'+x+'" class="'+(i===0?'active':'')+'">'+(x==='all'?'All courses':x)+'</button>'}).join('')}
+function render(){
+ var q=search.value.trim().toLowerCase();
+ var rows=data[domain].filter(function(x){return (filter==='all'||x[1]===filter)&&(!q||(x[0]+' '+x[1]+' '+x[2]+' '+x[3].join(' ')).toLowerCase().indexOf(q)>-1)});
+  grid.innerHTML=rows.map(function(x){
+   var initials=x[0].split(/[\s&/-]+/).filter(Boolean).map(function(w){return w.slice(0,1)}).join('').slice(0,4).toUpperCase();
+   var domainLabel=domain==='semi'?'SEMICONDUCTOR':'COMMUNICATIONS';
+   var coursePrice=x[3].length<=2?199:299;
+   var accent=(x[1]==='Verification')?'#b32645':(x[1]==='Physical Design')?'#557a9d':(x[1]==='Devices')?'#92713d':(x[1]==='Signal Processing')?'#6e65a6':(x[1]==='RF & Antennas')?'#36817b':'#a90025';
+   var mark='<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/><path d="M8 4v16M16 4v16"/></svg>';
+   return '<article class="card">'+
+    '<div class="thumb" style="--accent:'+accent+'"><span class="thumb-grid"></span><div><div class="thumb-domain">'+domainLabel+'</div><div class="thumb-code">'+initials+'</div></div><span class="thumb-mark">'+mark+'</span></div>'+
+    '<div class="card-body"><span class="tag">'+x[1]+'</span><h2>'+x[0]+'</h2><p>'+x[2]+'</p><ul>'+x[3].map(function(y){return '<li>'+y+'</li>'}).join('')+'</ul><span class="course-path-note">Structured course pathway</span></div>'+
+    '<div class="card-footer"><div><span class="fee-label">Course fee</span><span class="fee-value">₹'+coursePrice+'</span></div><a class="enrol-btn" href="#enrol" data-course="'+x[0].replace(/"/g,'&quot;')+'">Enquire to enrol <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></div>'+
+   '</article>';
+  }).join('');
+ empty.style.display=rows.length?'none':'block';
+ intro.textContent=INTRO[domain];
+}
+filtersEl.addEventListener('click',function(e){var b=e.target.closest('button');if(!b)return;filter=b.dataset.filter;[].forEach.call(filtersEl.querySelectorAll('button'),function(x){x.classList.toggle('active',x===b)});render()});
+search.addEventListener('input',render);
+ grid.addEventListener('click',function(e){
+  var link=e.target.closest&&e.target.closest('.enrol-btn');if(!link)return;
+  e.preventDefault();
+  try{parent.postMessage({ecit:'enrol',course:link.getAttribute('data-course')},'*')}catch(err){}
+ });
+E.onDomain(function(d){domain=d;filter='all';search.value='';drawFilters();render()});
+})();
+</script>
+</body>
+</html>

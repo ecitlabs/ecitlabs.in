@@ -1,0 +1,961 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" type="image/png" href="eup.png">
+<link rel="shortcut icon" type="image/png" href="eup.png">
+<title>ECIT | Electronics and Communication Institute of Technology</title>
+<meta name="description" content="ECIT is an illustrative engineering institute focused on electronics, semiconductors, wireless communication, and AI hardware.">
+<style>
+/* ===== 1. TOKENS ===== */
+:root{--ink:#171A1E;--red:#A90025;--white:#fff;--soft:#F3F4F5;--gray:#777;
+--serif:Georgia,"Times New Roman",serif;--sans:"Helvetica Neue",Arial,sans-serif;
+--s1:8px;--s2:16px;--s3:24px;--s4:48px;--s5:96px;--max:1240px}
+/* ===== 2. BASE ===== */
+*{box-sizing:border-box;margin:0}
+html{scroll-behavior:smooth;scroll-padding-top:150px;-webkit-text-size-adjust:100%}
+body{overflow-wrap:break-word;font-family:var(--sans);color:var(--ink);line-height:1.6;background:var(--white)}
+img{display:block;width:100%;height:100%;object-fit:cover;background:#2a2f36}
+a{color:inherit;text-decoration:none}
+:focus-visible{outline:3px solid var(--red);outline-offset:2px}
+.wrap{max-width:var(--max);margin:0 auto;padding:0 var(--s3)}
+section{padding:var(--s5) 0}
+h1,h2,h3{font-family:var(--serif);font-weight:400;line-height:1.15}
+h2{font-size:clamp(2rem,4vw,3rem);margin-bottom:var(--s3)}
+.lead{max-width:62ch;color:#454a52;font-size:1.1rem}
+.btn{display:inline-block;padding:14px 26px;font-weight:600;border:2px solid var(--red);background:var(--red);color:#fff;cursor:pointer;font:inherit;font-weight:600;transition:background .2s,color .2s}
+.btn:hover{background:#fff;color:var(--red)}
+.btn.alt{background:transparent;border-color:#fff}
+.btn.alt:hover{background:#fff;color:var(--ink)}
+.more{color:var(--red);font-weight:600;border-bottom:2px solid transparent}
+.more:hover{border-color:var(--red)}
+/* ===== 3. HEADER ===== */
+header{position:sticky;top:0;z-index:50;background:var(--ink);color:#fff}
+.bar{display:flex;flex-wrap:wrap;align-items:center;gap:0 var(--s2);min-height:72px;padding-top:8px;padding-bottom:0}
+.brand{display:flex;align-items:center;gap:0;margin-right:auto}
+/* White logo sits directly on the charcoal header; the name is stacked and bold, MIT-style */
+/* Brand sizing, MIT-style: tight three-line name whose visible height equals the logo height.
+   Visible height = 2 x line-height + cap-height = 2.956 x font-size, so font-size = 0.338 x --bh. Change --bh only. */
+.brand{--bh:52px;--nf:calc(var(--bh)*.25);--nl:calc(var(--nf)*1.12)}
+.brand .logo{height:var(--bh);width:auto;max-width:none;flex:none;object-fit:contain;background:none}
+.brand .name{margin-left:-4px;font-family:var(--sans);font-weight:700;font-size:var(--nf);line-height:var(--nl);color:#fff;letter-spacing:0;white-space:nowrap}
+.brand b{display:block;font-family:var(--serif);font-size:1.3rem;letter-spacing:.04em;line-height:1}
+.brand small{display:block;font-size:.78rem;line-height:1.3;color:#d5d8dc;margin-top:3px}
+nav ul{list-style:none;padding:0;display:flex;gap:4px;align-items:center}
+.nb{background:none;border:0;color:#fff;font:inherit;padding:26px 14px;cursor:pointer;border-bottom:3px solid transparent}
+.nb:hover,.nb[aria-expanded=true],.nb.is-current{border-color:var(--red);background:#22262b}
+nav a.nb{display:block;text-decoration:none;border-bottom:3px solid transparent;line-height:1.6}
+nav ul>li>.nb:not(.pro-nav){color:#fff!important;background:transparent!important}
+nav ul>li>.nb:not(.pro-nav):hover,
+nav ul>li>.nb:not(.pro-nav)[aria-expanded=true],
+nav ul>li>.nb:not(.pro-nav).is-current{color:#fff!important;background:#22262b!important;border-bottom-color:var(--red)!important}
+
+.mega{display:none;position:absolute;left:0;right:0;top:72px;background:#fff;color:var(--ink);box-shadow:0 20px 40px rgba(0,0,0,.2);border-top:3px solid var(--red)}
+.mega.open{display:block}
+.mega .wrap{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--s4);padding-top:var(--s4);padding-bottom:var(--s4)}
+.mega h3{font-size:1.2rem;margin-bottom:var(--s1);font-family:var(--serif)}
+.mega p{font-size:.9rem;color:var(--gray);margin-bottom:var(--s1)}
+.mega a{display:block;padding:4px 0}
+.mega a:hover{color:var(--red)}
+.icon{background:none;border:0;color:#fff;cursor:pointer;padding:10px}
+.login-link{order:5;flex-shrink:0;display:inline-flex;align-items:center;gap:7px;color:#fff;font:600 .88rem var(--sans);padding:10px 12px;white-space:nowrap;border:1px solid #555b63;border-radius:2px;transition:background .2s,border-color .2s}
+.login-link:hover{background:#292e34;border-color:var(--red)}
+.login-link svg{width:19px;height:19px;stroke:#fff;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+
+.icon svg{width:22px;height:22px;stroke:#fff;fill:none;stroke-width:2}
+#menuBtn{display:none}
+/* ===== 4. HERO ===== */
+.hero{position:relative;min-height:calc(100vh - 72px);min-height:min(88vh,860px);display:flex;align-items:flex-end;color:#fff;padding:0}
+.hero img{position:absolute;inset:0}
+.hero::after{content:"";position:absolute;inset:0;background:linear-gradient(0deg,rgba(23,26,30,.92) 5%,rgba(23,26,30,.35) 70%)}
+.hero .wrap{position:relative;z-index:2;padding-bottom:var(--s5);padding-top:var(--s5)}
+.hero h1{font-family:var(--serif);font-weight:400;font-size:clamp(2.6rem,7vw,5.5rem);max-width:15ch;line-height:1.04;margin-bottom:var(--s3)}
+.hero p{max-width:52ch;font-size:1.2rem;margin-bottom:var(--s4);color:#e6e8ea}
+.hero .btn+.btn{margin-left:12px}
+/* ===== 5. ACADEMICS ===== */
+.acad{background:var(--soft)}
+.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--s4) var(--s3);margin-top:var(--s4)}
+.blk .im{aspect-ratio:3/2;overflow:hidden;margin-bottom:var(--s2)}
+.blk img{transition:transform .5s}
+.blk:hover img{transform:scale(1.04)}
+.blk h3{font-size:1.4rem;margin-bottom:6px}
+.blk p{color:#4a4f56;font-size:.95rem;margin-bottom:8px}
+/* ===== 6. RESEARCH ===== */
+.research{background:var(--ink);color:#fff}
+.research .lead{color:#c5c8cc}
+.rlist{margin-top:var(--s4);display:grid;grid-template-columns:repeat(6,1fr);gap:var(--s3)}
+.rcard{grid-column:span 2;position:relative;min-height:360px;display:flex;align-items:flex-end;overflow:hidden}
+.rcard:nth-child(1),.rcard:nth-child(4){grid-column:span 3}
+.rcard img{position:absolute;inset:0;opacity:.55;transition:opacity .3s}
+.rcard:hover img{opacity:.8}
+.rcard div{position:relative;padding:var(--s3)}
+.rcard h3{font-size:1.5rem;margin-bottom:6px}
+.rcard p{font-size:.92rem;color:#e0e2e4;margin-bottom:8px}
+.rcard .more{color:#fff;border-color:var(--red)}
+/* ===== 7. NEWS ===== */
+.note{color:var(--gray);font-size:.85rem;margin-bottom:var(--s3)}
+.news{display:grid;grid-template-columns:repeat(4,1fr);gap:var(--s3)}
+.card .im{aspect-ratio:4/3;margin-bottom:var(--s2);overflow:hidden}
+.card time{font-size:.8rem;color:var(--red);font-weight:600}
+.card h3{font-size:1.2rem;margin:4px 0 8px}
+.card p{font-size:.9rem;color:#4a4f56}
+/* ===== 8. CAMPUS ===== */
+.campus{background:var(--soft)}
+.mosaic{display:grid;grid-template-columns:2fr 1fr 1fr;grid-template-rows:260px 260px;gap:12px;margin:var(--s4) 0 var(--s3)}
+.mosaic figure{position:relative;overflow:hidden}
+.mosaic figure:first-child{grid-row:span 2}
+.mosaic figcaption{position:absolute;left:0;bottom:0;right:0;padding:var(--s2);color:#fff;background:linear-gradient(0deg,rgba(0,0,0,.75),transparent);font-size:.95rem}
+/* ===== 8b. TRACKS AND CAMPUS TEXT ===== */
+.tracks{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--s4);margin-top:var(--s4)}
+.tracks h3{font-size:1.5rem;border-bottom:3px solid var(--red);padding-bottom:8px;margin-bottom:var(--s2)}
+.tracks ol{padding-left:1.4em}.tracks li{padding:4px 0;color:#454a52}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:var(--s4);margin:0 0 var(--s4)}
+.two h3{font-size:1.3rem;margin-bottom:6px}.two p{color:#4a4f56}
+/* ===== 9. ABOUT ===== */
+.about .wrap{display:grid;grid-template-columns:1fr 1fr;gap:var(--s5);align-items:start}
+.about .pts{display:grid;gap:var(--s3)}
+.pts h3{font-size:1.3rem;border-left:4px solid var(--red);padding-left:var(--s2);margin-bottom:6px}
+.pts p{padding-left:calc(var(--s2) + 4px);color:#4a4f56}
+/* ===== 10. FOOTER ===== */
+footer{background:var(--ink);color:#c5c8cc;padding:var(--s5) 0 var(--s3);font-size:.92rem}
+.fgrid{display:grid;grid-template-columns:1.6fr repeat(4,1fr);gap:var(--s4)}
+footer h3{color:#fff;font-family:var(--sans);font-size:1rem;font-weight:600;margin-bottom:var(--s1)}
+footer a{display:block;padding:3px 0}
+footer a:hover{color:#fff;text-decoration:underline}
+.legal{margin-top:var(--s4);padding-top:var(--s3);border-top:1px solid #343940;font-size:.82rem}
+/* ===== 11. SEARCH OVERLAY ===== */
+#search{position:fixed;inset:0;z-index:100;background:rgba(23,26,30,.97);color:#fff;display:none;overflow:auto;padding:var(--s4) 0}
+#search.open{display:block}
+#search label{font-size:.95rem}
+#q{width:100%;background:none;border:0;border-bottom:2px solid var(--red);color:#fff;font:1.15rem var(--serif);padding:9px 0;outline:none}
+#res a{display:block;padding:12px 0;border-bottom:1px solid #343940}
+#res a:hover b{color:#ff6a85}
+#res b{font-family:var(--serif);font-weight:400;font-size:1rem}
+#res span{display:block;color:#aab;font-size:.8rem}
+.sx{float:right}
+/* ===== 11b. DOMAIN TOGGLE + DOMAIN SECTIONS ===== */
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+[hidden]{display:none!important}
+.seg{position:relative;display:grid;grid-template-columns:1fr 1fr;background:#262a30;border:1px solid #3a3f46;border-radius:999px;padding:3px;margin-left:var(--s2);flex:none}
+.seg-ind{position:absolute;top:3px;bottom:3px;left:3px;width:calc(50% - 3px);background:var(--red);border-radius:999px;transition:transform .3s cubic-bezier(.4,0,.2,1)}
+.seg[data-domain=comm] .seg-ind{transform:translateX(100%)}
+.seg button{position:relative;z-index:1;background:none;border:0;color:#fff;font:600 .72rem var(--sans);letter-spacing:.06em;padding:8px 14px;border-radius:999px;cursor:pointer;white-space:nowrap;transition:background .2s}
+.seg button[aria-checked=false]:hover{background:rgba(255,255,255,.1)}
+.seg button:focus-visible{outline:2px solid #fff;outline-offset:2px}
+.brand{margin-right:0;order:1;padding-bottom:8px}
+.seg{order:2;margin-bottom:8px}
+#searchBtn{order:3;margin-left:auto;margin-bottom:8px}
+#menuBtn{order:4;margin-bottom:8px}
+nav{order:5;flex:0 0 100%;margin-left:0;border-top:1px solid #30353c}
+.nb{padding:14px 14px}
+.mega{top:100%}
+.catgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(280px,100%),1fr));gap:var(--s4) var(--s3);margin-top:var(--s4)}
+.cat{border-top:3px solid var(--red);padding-top:var(--s2)}
+.cat h3{font-size:1.4rem;margin-bottom:6px}
+.cat p{color:#4a4f56;font-size:.95rem;margin-bottom:8px}
+.cat ul{list-style:none;padding:0;font-size:.95rem}
+.cat li{padding:6px 0;border-top:1px solid #d9dbdd}
+.resgrid{display:grid;grid-template-columns:1fr 1fr;gap:0 var(--s4);margin-top:var(--s3)}
+.rs{padding:16px 0;border-bottom:1px solid #d9dbdd}
+.rs b{display:block;font-family:var(--serif);font-weight:400;font-size:1.2rem}
+.rs span{color:#4a4f56;font-size:.92rem}
+.progs{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--s3);margin-top:var(--s4)}
+.prog{background:#fff;padding:var(--s3);border-top:3px solid var(--red)}
+.prog h3{font-size:1.4rem;margin-bottom:6px}
+.prog p{color:#4a4f56;font-size:.95rem;margin-bottom:var(--s2)}
+.prog ol{padding-left:1.3em;font-size:.93rem;color:#33383e}
+.prog li{padding:2px 0}
+.roles{list-style:none;padding:0;display:grid;grid-template-columns:repeat(3,1fr);gap:0 var(--s3);margin-top:var(--s4)}
+.roles li{padding:14px 0;border-bottom:1px solid #cfd2d5;font-family:var(--serif);font-size:1.2rem}
+@media(min-width:1101px){.rlist .rcard:nth-child(n){grid-column:span 3}}
+
+/* ===== TECHNICAL LIBRARY ===== */
+.library{background:#fff}
+.library-intro{display:flex;justify-content:space-between;align-items:end;gap:24px;flex-wrap:wrap}
+.library-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:var(--s4)}
+.library-card{border:1px solid #d9dbdd;border-top:3px solid var(--red);padding:20px;background:#fff}
+.library-card h3{font-size:1.3rem;margin-bottom:8px}
+.library-card p{color:#4a4f56;font-size:.92rem;margin-bottom:12px}
+.library-card ul{list-style:none;padding:0}
+.library-card li{border-top:1px solid #e2e3e5;padding:7px 0;font-size:.92rem}
+.library-card a{color:var(--red);font-weight:600}
+.library-card a:hover{text-decoration:underline}
+.library-note{font-size:.85rem;color:var(--gray);margin-top:18px}
+@media(max-width:900px){.library-grid{grid-template-columns:1fr 1fr}}
+@media(max-width:600px){.library-grid{grid-template-columns:1fr}}
+
+/* ===== 12. RESPONSIVE ===== */
+@media(max-width:1100px){
+ nav{position:absolute;left:0;right:0;top:100%;background:var(--ink);display:none;max-height:calc(100vh - 150px);overflow:auto;border-top:1px solid #30353c}
+ nav.open{display:block}
+ nav ul{flex-direction:column;padding:var(--s2) var(--s3)}
+ .nb{width:100%;text-align:left;padding:14px 0}
+ .mega{position:static;box-shadow:none}
+ .mega .wrap{grid-template-columns:1fr;gap:var(--s2)}
+ #menuBtn{display:block}
+ .grid3,.news{grid-template-columns:1fr 1fr}
+ .rlist{grid-template-columns:1fr}.rcard,.rcard:nth-child(n){grid-column:auto;min-height:300px}
+ .mosaic{grid-template-columns:1fr 1fr;grid-template-rows:auto}
+ .mosaic figure{height:220px}.mosaic figure:first-child{grid-column:span 2;grid-row:auto;height:300px}
+ .about .wrap,.tracks,.two{grid-template-columns:1fr;gap:var(--s4)}
+ .fgrid{grid-template-columns:1fr 1fr}
+}
+@media(max-width:600px){
+ section{padding:64px 0}.grid3,.news{grid-template-columns:1fr}
+ .hero .btn{display:block;text-align:center}.hero .btn+.btn{margin:12px 0 0}
+}
+/* ===== 12b. RESPONSIVE ADDITIONS (header, toggle, domain sections) ===== */
+@media(max-width:1100px){
+ /* Row 1: brand + search + menu. Row 2: full-width toggle. Nav opens below. */
+ .brand{flex:1 1 0;min-width:0}
+ #searchBtn{margin-left:0}
+ .seg{order:6;flex:0 0 100%;margin:0 0 12px}
+ .seg button{padding:9px 12px}
+ .progs{grid-template-columns:1fr 1fr}
+ html{scroll-padding-top:160px}
+}
+@media(max-width:700px){.progs,.roles,.resgrid{grid-template-columns:1fr}}
+@media(max-width:600px){
+ .bar.wrap{padding-left:16px;padding-right:16px}
+ .brand{--bh:44px}.brand b{font-size:1.15rem}
+ .brand small{font-size:.7rem}
+ .seg button{font-size:.7rem;letter-spacing:.03em}
+ .fgrid{grid-template-columns:1fr}
+ .mosaic{grid-template-columns:1fr}.mosaic figure:first-child{grid-column:auto}
+ .hero .wrap{padding-top:var(--s4);padding-bottom:var(--s4)}
+}
+@media(max-width:360px){.brand{--bh:38px}.seg button{padding:9px 6px;letter-spacing:0}}
+/* ===== 12c. DESKTOP DENSITY: fits more of the page at 100% zoom, MIT-style wide layout ===== */
+@media(min-width:1101px){
+ html{font-size:15px;scroll-padding-top:140px}
+ :root{--s5:64px;--max:1400px}
+ .lead{font-size:1rem}
+ h2{font-size:clamp(1.8rem,2.6vw,2.5rem);margin-bottom:var(--s2)}
+ .hero{min-height:min(74vh,660px)}
+ .hero h1{font-size:clamp(2.4rem,4.6vw,4.2rem)}
+ .hero p{font-size:1.05rem;margin-bottom:var(--s3)}
+ .btn{padding:12px 22px}
+ .rcard{min-height:300px}
+ .mosaic{grid-template-rows:220px 220px;margin:var(--s3) 0}
+ .catgrid,.progs,.roles,.rlist{margin-top:var(--s3)}
+ footer{padding:var(--s4) 0 var(--s3)}
+}
+/* One-row header (logo, toggle, navigation, search) once there is room */
+@media(min-width:1280px){
+ html{scroll-padding-top:90px}
+ .bar{flex-wrap:nowrap;padding-top:0}
+ .brand{padding-bottom:0}.brand small{white-space:nowrap;font-size:.72rem}
+ .seg{margin-bottom:0}
+ nav{order:3;flex:0 1 auto;margin-left:auto;border-top:0}
+ .nb{padding:26px 11px}
+ #searchBtn{order:4;margin:0}
+}
+/* ===== 12d. HEADER SPANS FULL WIDTH: brand and toggle at far left, navigation and search at far right ===== */
+@media(min-width:1101px){
+ header .bar.wrap{max-width:none;padding-left:32px;padding-right:32px}
+ nav ul{justify-content:flex-end}
+}
+/* ===== 12e. HERO FIX: content spans the container, left-aligned with the page ===== */
+.hero .wrap{width:100%}
+.hero img{color:transparent;font-size:0;width:100%;height:100%;object-fit:cover;object-position:center}
+.hero h1{max-width:18ch}
+.hero .btn{margin-bottom:8px}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important}}
+
+/* ECIT sign-in dialog */
+.auth-overlay{position:fixed;inset:0;z-index:1200;display:none;align-items:flex-start;justify-content:center;overflow-y:auto;overscroll-behavior:contain;-webkit-overflow-scrolling:touch;padding:20px;background:rgba(8,10,13,.76);backdrop-filter:blur(5px)}
+.auth-overlay.open{display:flex}
+.auth-dialog{position:relative;box-sizing:border-box;width:min(100%,430px);margin:auto;height:auto;display:flex;flex-direction:column;background:#fff;color:#20242a;border-top:5px solid var(--red);box-shadow:0 24px 80px rgba(0,0,0,.35);animation:authIn .18s ease-out}
+@keyframes authIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+.auth-top{background:var(--ink);color:#fff;padding:12px 30px 14px;flex:0 0 auto}
+.auth-brand{display:flex;align-items:center;gap:12px;margin-bottom:10px}
+.auth-mark{width:38px;height:38px;display:grid;place-items:center;background:var(--red);font-weight:800;letter-spacing:-1px;color:#fff}
+.auth-brand strong{font-size:15px;line-height:1.2;letter-spacing:.04em}
+.auth-brand small{display:block;color:#c3c7cc;font-size:10px;letter-spacing:.12em;margin-top:4px}
+.auth-top h2{font:600 26px var(--serif);margin:0 0 6px}
+.auth-top p{font-size:13px;color:#c3c7cc;margin:0}
+.auth-close{position:absolute;right:15px;top:14px;border:0;background:transparent;color:#fff;font-size:24px;line-height:1;cursor:pointer;padding:5px}
+.auth-form{padding:13px 30px 18px;flex:0 0 auto}.auth-signup[hidden]{display:none}
+.auth-field{display:block;margin-bottom:9px}
+.auth-field span{display:block;font-size:12px;font-weight:700;margin-bottom:5px;color:#30353b}
+.auth-field input{width:100%;height:40px;border:1px solid #d3d6da;border-radius:2px;padding:0 12px;font:14px var(--sans);color:#20242a;background:#fff;outline:none}
+.auth-field input:focus{border-color:var(--red);box-shadow:0 0 0 3px rgba(169,0,37,.09)}
+.auth-options{display:flex;align-items:center;justify-content:space-between;gap:10px;margin:0 0 9px;font-size:12px}
+.auth-options label{display:flex;align-items:center;gap:7px;color:#555b63}
+.auth-options a,.auth-foot a{color:var(--red);font-weight:600;text-decoration:none}
+.auth-submit{width:100%;min-height:42px;border:0;background:var(--red);color:#fff;font:700 13px var(--sans);letter-spacing:.04em;cursor:pointer;transition:background .2s}
+.auth-submit:hover{background:#87001e}
+.auth-note{font-size:10px;color:#777f88;line-height:1.25;text-align:center;margin:6px 0 0}
+.auth-foot{border-top:1px solid #e8e9eb;padding-top:7px;margin-top:7px;text-align:center;font-size:12px;color:#5d646d}
+
+.auth-brand{display:flex;align-items:center;gap:10px;margin-bottom:18px}
+.auth-logo{width:44px;height:44px;object-fit:contain;flex:0 0 auto}
+.auth-institution{font:700 12px/1.12 var(--sans);letter-spacing:.01em;color:#fff}
+.auth-provider-divider{display:flex;align-items:center;gap:12px;margin:12px 0 9px;color:#818791;font-size:11px}
+.auth-provider-divider:before,.auth-provider-divider:after{content:"";height:1px;background:#e1e3e6;flex:1}
+.auth-providers{display:grid;gap:6px}
+.auth-provider{width:100%;height:36px;display:flex;align-items:center;justify-content:center;gap:11px;border:1px solid #d5d8dc;border-radius:2px;background:#fff;color:#30343a;font:600 12px var(--sans);cursor:pointer;transition:background .18s,border-color .18s}
+.auth-provider:hover{background:#f7f8f9;border-color:#9da3aa}
+.auth-provider svg{width:19px;height:19px;flex:0 0 auto}
+
+@media(max-width:480px){.auth-top,.auth-form{padding-left:22px;padding-right:22px}}
+
+
+nav ul li{display:flex;align-items:center}
+.pro-nav{
+  position:relative;
+  top:0!important;
+  align-self:center;
+  vertical-align:middle;
+  display:inline-flex!important;
+  align-items:center;
+  justify-content:center;
+  line-height:1.2!important;
+  gap:6px;
+  margin:0 5px;
+  padding:7px 12px!important;
+  color:#fff!important;
+  font-weight:800!important;
+  letter-spacing:.035em;
+  border:1px solid rgba(255,92,119,.78)!important;
+  border-radius:999px;
+  background:linear-gradient(135deg,rgba(169,0,37,.24),rgba(169,0,37,.08))!important;
+  text-shadow:0 0 10px rgba(255,82,111,.35);
+  box-shadow:0 0 0 1px rgba(169,0,37,.08),0 0 14px rgba(169,0,37,.12);
+  transition:color .25s ease,background .25s ease,border-color .25s ease,box-shadow .25s ease,transform .25s ease!important;
+}
+.pro-nav:before{
+  content:"⚡";
+  display:inline-block;
+  color:#ff526f;
+  font-size:.9em;
+  line-height:1;
+  text-shadow:0 0 8px rgba(255,82,111,.7);
+  animation:proNavSpark 2.8s ease-in-out infinite;
+}
+.pro-nav:hover{
+  color:#fff!important;
+  background:linear-gradient(135deg,#A90025,#76001b)!important;
+  border-color:#ff526f!important;
+  box-shadow:0 0 0 3px rgba(169,0,37,.12),0 0 20px rgba(169,0,37,.35);
+  transform:translateY(-1px);
+}
+@keyframes proNavSpark{
+  0%,78%,100%{opacity:1;filter:drop-shadow(0 0 0 rgba(255,82,111,0))}
+  82%{opacity:.45;filter:drop-shadow(0 0 5px #ff526f)}
+  86%{opacity:1;filter:drop-shadow(0 0 9px #ff526f)}
+}
+@media(prefers-reduced-motion:reduce){.pro-nav:before{animation:none}}
+
+
+/* Phone menu: a transparent layer under the open menu catches taps on the page (including section pages) and closes it. */
+#navBackdrop{display:none}
+@media(max-width:1100px){body.nav-open #navBackdrop{display:block;position:fixed;inset:0;z-index:40;background:transparent;-webkit-tap-highlight-color:transparent}}
+
+/* Navigation labels: always one line, slightly smaller than before. */
+#nav .nb{font-size:14px;white-space:nowrap}
+@media(min-width:1280px){#nav .nb{padding-left:9px;padding-right:9px}}
+@media(max-width:1100px){#nav .nb{font-size:15px}}
+
+/* ===== Section pages: each lives in its own .html file and is loaded into #viewHost ===== */
+#viewHost{display:none}
+body.show-view #viewHost{display:block}
+body.show-view main>section{display:none}
+.view-frame{display:block;width:100%;border:0;min-height:calc(100vh - 78px);background:#fff}
+.view-frame[hidden]{display:none}
+
+/* ===== FUTURISTIC LAYER (same tokens: --ink, --red, white, soft; only additive) ===== */
+.mono{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}
+/* Audience section */
+.who{background:var(--ink);color:#fff;position:relative;overflow:hidden}
+.who:before{content:"";position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.04) 1px,transparent 1px);background-size:48px 48px;pointer-events:none}
+.who .wrap{position:relative}
+.who .lead{color:#c5c8cc}
+.tag{font:600 .74rem ui-monospace,Menlo,Consolas,monospace;letter-spacing:.2em;text-transform:uppercase;color:#ff526f;display:block;margin-bottom:10px}
+.audgrid{display:grid;grid-template-columns:repeat(5,1fr);gap:var(--s2);margin-top:var(--s4)}
+.aud{position:relative;display:flex;flex-direction:column;border:1px solid #30353c;background:#1b1f24;overflow:hidden;transition:transform .3s,border-color .3s,box-shadow .3s}
+.aud:hover{transform:translateY(-6px);border-color:#ff526f;box-shadow:0 18px 40px rgba(169,0,37,.28)}
+.aud .im{aspect-ratio:4/3;overflow:hidden;position:relative}
+.aud .im:after{content:"";position:absolute;inset:0;background:linear-gradient(0deg,#1b1f24,transparent 60%)}
+.aud img{opacity:.75;transition:transform .6s,opacity .3s}.aud:hover img{transform:scale(1.08);opacity:1}
+.aud div.tx{padding:var(--s2);display:flex;flex-direction:column;gap:6px;flex:1}
+.aud h3{font-size:1.25rem}.aud p{font-size:.88rem;color:#c5c8cc}
+.aud .more{color:#fff;border-color:var(--red);align-self:flex-start;margin-top:auto;font-size:.88rem}
+.aud:before,.aud:after{content:"";position:absolute;width:14px;height:14px;z-index:2;border:2px solid #ff526f;opacity:0;transition:opacity .3s}
+.aud:before{top:8px;left:8px;border-right:0;border-bottom:0}.aud:after{bottom:8px;right:8px;border-left:0;border-top:0}
+.aud:hover:before,.aud:hover:after{opacity:1}
+/* Pathway */
+.path{background:var(--soft)}
+.steps{list-style:none;padding:0;display:grid;grid-template-columns:repeat(4,1fr);gap:0;margin-top:var(--s4);counter-reset:s;position:relative}
+.steps li{position:relative;padding:var(--s3) var(--s3) var(--s3) 0;counter-increment:s}
+.steps li:before{content:"0" counter(s);display:grid;place-items:center;width:52px;height:52px;border:2px solid var(--red);background:#fff;color:var(--red);font:700 1rem ui-monospace,Menlo,Consolas,monospace;margin-bottom:var(--s2);position:relative;z-index:1;transition:background .2s,color .2s,box-shadow .3s}
+.steps li:hover:before{background:var(--red);color:#fff;box-shadow:0 0 22px rgba(169,0,37,.5)}
+.steps li:after{content:"";position:absolute;left:52px;right:0;top:calc(var(--s3) + 26px);height:2px;background:repeating-linear-gradient(90deg,var(--red) 0 8px,transparent 8px 14px)}
+.steps li:last-child:after{display:none}
+.steps h3{font-size:1.3rem;margin-bottom:6px}.steps p{color:#4a4f56;font-size:.93rem}
+/* Upgrades to existing blocks (no colour changes) */
+main h2:before{content:"";display:block;width:44px;height:4px;background:var(--red);margin-bottom:14px;box-shadow:0 0 14px rgba(169,0,37,.6)}
+.cat,.library-card,.prog{transition:transform .3s,box-shadow .3s,border-color .3s}
+.cat:hover,.library-card:hover{transform:translateY(-4px);box-shadow:0 14px 32px rgba(23,26,30,.14)}
+.library-card:hover{border-color:var(--red)}
+.rcard{border:1px solid #30353c;transition:border-color .3s,box-shadow .3s}
+.rcard:hover{border-color:#ff526f;box-shadow:0 0 30px rgba(169,0,37,.35)}
+.card .im,.blk .im{position:relative}
+.card:hover img{transform:scale(1.05)}.card img{transition:transform .5s}
+.js .rv{opacity:0;transform:translateY(26px);transition:opacity .7s,transform .7s}
+.js .rv.in{opacity:1;transform:none}
+@media(max-width:1100px){.audgrid{grid-template-columns:1fr 1fr}.steps{grid-template-columns:1fr 1fr}.steps li:nth-child(2):after{display:none}}
+@media(max-width:600px){.audgrid,.steps{grid-template-columns:1fr}.steps li:after{display:none}}
+@media(prefers-reduced-motion:reduce){.js .rv{opacity:1;transform:none}}
+
+/* ===== COMPACT HEADER NAV (fits Sign in on one row) ===== */
+@media(min-width:1101px){
+ header .bar.wrap{gap:0 10px;padding-left:24px;padding-right:24px}
+ .seg{margin-left:8px}
+ .seg button{padding:7px 11px;font-size:.68rem}
+ nav ul{gap:0}
+ #nav .nb{font-size:13px;letter-spacing:.01em;padding-left:8px;padding-right:8px}
+ .pro-nav{margin:0 4px!important;padding:6px 11px!important}
+ .login-link{padding:8px 11px;font-size:.82rem;margin-left:2px}
+}
+@media(min-width:1280px){
+ nav{flex:0 1 auto;min-width:0}
+ #nav .nb{padding:26px 8px}
+ .brand{--bh:48px}
+}
+</style>
+</head>
+<body>
+<div id="navBackdrop" aria-hidden="true"></div>
+<!-- ===== HEADER ===== -->
+<header>
+ <div class="wrap bar">
+  <a href="#top" class="brand" aria-label="ECIT, Electronics and Communication Institute of Technology, home">
+   <!-- Logo file: keep ecitw.png (white logo) in the same folder as index.html. If it is missing, a simple mark is shown. -->
+    <img class="logo" src="ecitw.png" alt="" onerror="this.onerror=null;this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 40 40%22%3E%3Crect width=%2240%22 height=%2240%22 fill=%22%23A90025%22/%3E%3Cpath d=%22M9 11h22M9 20h15M9 29h22M9 11v18%22 stroke=%22%23fff%22 stroke-width=%224%22 fill=%22none%22/%3E%3C/svg%3E'">
+   <span class="name">Electronics and<br>Communication<br>Institute of Technology</span>
+  </a>
+  <!-- Domain toggle: switches the learning domain (VLSI / Communication) -->
+  <div class="seg" id="seg" role="radiogroup" aria-label="Learning domain" data-domain="semi">
+   <span class="seg-ind" aria-hidden="true"></span>
+   <button type="button" role="radio" aria-checked="true" data-d="semi">Semiconductor</button>
+   <button type="button" role="radio" aria-checked="false" tabindex="-1" data-d="comm">Communication</button>
+  </div>
+  <nav id="nav" aria-label="Main">
+   <ul>
+    <li><a class="nb" href="#courses" aria-label="Courses">Courses</a></li>
+    <li><a class="nb" href="#certifications">Certifications</a></li>
+    <li><a class="nb" href="#technical-library">Technical Library</a></li>
+    <li><a class="nb" href="#prep-arena">Prep Arena</a></li>
+    <li><button class="nb" aria-expanded="false" aria-controls="m4">Career &amp; Placements</button><div class="mega" id="m4"><div class="wrap"></div></div></li>
+    <li><a class="nb pro-nav" href="#pro">Pro</a></li>
+    <li><button class="nb" aria-expanded="false" aria-controls="m5">About ECIT</button>
+     <div class="mega" id="m5"><div class="wrap">
+      <div><h3>The institute</h3><a href="#about-ecit">Vision</a><a href="#about-ecit">Research priorities</a></div>
+      <div><h3>Connect</h3><a href="#footer">Contact</a><a href="#campus">Campus</a></div>
+      <div><h3>Overview</h3><a class="more" href="#about-ecit">About ECIT</a></div></div></div></li>
+   </ul>
+  </nav>
+  <button class="icon" id="searchBtn" aria-label="Open search"><svg viewBox="0 0 24 24"><circle cx="10" cy="10" r="7"/><path d="M15 15l6 6"/></svg></button>
+  <button class="icon" id="menuBtn" aria-label="Toggle menu" aria-expanded="false" aria-controls="nav"><svg viewBox="0 0 24 24"><path d="M3 6h18M3 12h18M3 18h18"/></svg></button>
+  <a class="login-link" href="#signin" aria-label="Sign in">
+   <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4.2 3.6-7 8-7s8 2.8 8 7"/></svg>
+   <span>Sign in</span>
+  </a>
+ </div>
+</header>
+
+<main id="top">
+<!-- ===== HERO ===== -->
+<section class="hero" style="padding:0">
+ <img id="heroImg" src="https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=2000&h=1100&q=75" alt="Close view of an electronic circuit board">
+ <div class="wrap">
+  <h1 id="heroH">Engineering the circuits behind tomorrow's connections</h1>
+  <p id="heroP">ECIT brings together electronics, semiconductors, and communication systems to teach and research the technology that links the world.</p>
+  <a class="btn" href="#courses">Explore Courses</a><a class="btn alt" href="#research">Discover Research</a>
+ </div>
+</section>
+
+
+<!-- ===== WHO IT IS FOR ===== -->
+<section class="who" id="learners"><div class="wrap">
+ <span class="tag rv">// Learning for every stage</span>
+ <h2 class="rv">Courses for students, researchers and working engineers</h2>
+ <p class="lead rv">From first-year fundamentals to postdoctoral depth and industry upskilling, pick the level that matches where you are and build up from there.</p>
+ <div class="audgrid">
+  <a class="aud rv" href="#courses" data-s="Undergraduate courses fundamentals"><div class="im"><img loading="lazy" src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=700&q=70" alt=""></div><div class="tx"><span class="tag">01 / UG</span><h3>Undergraduate</h3><p>Digital electronics, circuits, signals and HDL basics with guided labs.</p><span class="more">View courses</span></div></a>
+  <a class="aud rv" href="#courses" data-s="Postgraduate courses MTech MS advanced"><div class="im"><img loading="lazy" src="https://images.unsplash.com/photo-1581092160562-40aa08e78837?auto=format&fit=crop&w=700&q=70" alt=""></div><div class="tx"><span class="tag">02 / PG</span><h3>Postgraduate</h3><p>Advanced RTL, verification, physical design, DSP and wireless systems.</p><span class="more">View courses</span></div></a>
+  <a class="aud rv" href="#research" data-s="PhD researchers research methods"><div class="im"><img loading="lazy" src="https://images.unsplash.com/photo-1532094349884-543bc11b234d?auto=format&fit=crop&w=700&q=70" alt=""></div><div class="tx"><span class="tag">03 / PhD</span><h3>PhD scholars</h3><p>Device physics, estimation theory, low-power design and research tooling.</p><span class="more">Explore research</span></div></a>
+  <a class="aud rv" href="#research" data-s="Postdoc researchers emerging computing"><div class="im"><img loading="lazy" src="https://images.unsplash.com/photo-1620712943543-bcc4688e7485?auto=format&fit=crop&w=700&q=70" alt=""></div><div class="tx"><span class="tag">04 / Postdoc</span><h3>Postdoctoral</h3><p>Chiplets, AI accelerators, 6G links and cross-domain research topics.</p><span class="more">Explore research</span></div></a>
+  <a class="aud rv" href="#pro" data-s="Professionals upskilling industry"><div class="im"><img loading="lazy" src="https://images.unsplash.com/photo-1517048676732-d65bc937f952?auto=format&fit=crop&w=700&q=70" alt=""></div><div class="tx"><span class="tag">05 / Pro</span><h3>Professionals</h3><p>Focused, project-based upskilling for working design and RF engineers.</p><span class="more">Go Pro</span></div></a>
+ </div>
+</div></section>
+
+<!-- ===== PATHWAY ===== -->
+<section class="path" id="pathway"><div class="wrap">
+ <span class="tag rv">// How learning works</span>
+ <h2 class="rv">A clear path from fundamentals to expertise</h2>
+ <ol class="steps">
+  <li class="rv"><h3>Foundations</h3><p>Core electronics, logic, signals and mathematics.</p></li>
+  <li class="rv"><h3>Specialise</h3><p>Choose semiconductor or communication tracks.</p></li>
+  <li class="rv"><h3>Build</h3><p>Projects on open-source simulators and FPGA flows.</p></li>
+  <li class="rv"><h3>Advance</h3><p>Research themes, careers and placement preparation.</p></li>
+ </ol>
+</div></section>
+
+<!-- ===== COURSES / RESOURCES / PROGRAMS (filled by JS from DOMAINS) ===== -->
+<section class="acad" id="academics"><div class="wrap"><h2>Courses</h2><p class="lead" id="catLead"></p><div class="catgrid" id="catGrid"></div></div></section>
+
+<!-- ===== TECHNICAL LIBRARY ===== -->
+<section class="library" id="library">
+ <div class="wrap">
+  <div class="library-intro">
+   <div><h2>Technical Library</h2><p class="lead" id="libraryLead">A structured, searchable reference space for engineering concepts, protocols, equations, and implementation notes.</p></div>
+   <a class="btn" href="#technical-library">Open full library</a>
+  </div>
+  <div class="library-grid" id="libraryGrid"></div>
+  <p class="library-note">Browse the complete subject-wise catalog, including searchable communication topics, in the dedicated library portal. PDF links can be added as each resource is published.</p><p style="margin-top:14px"><a class="more" href="#technical-library">Explore the complete Technical Library →</a></p>
+ </div>
+</section>
+
+<!-- Programs content is consolidated into the Courses page. -->
+
+<!-- ===== RESEARCH ===== -->
+<section class="research" id="research"><div class="wrap">
+ <h2>Research and innovation</h2>
+ <p class="lead">Six themes organize ECIT's research. Descriptions are illustrative of the intended focus.</p>
+ <div class="rlist">
+  <a class="rcard" href="#academics" data-s="Semiconductor technology research" data-dom="semi"><img loading="lazy" src="https://images.unsplash.com/photo-1562408590-e32931084e23?auto=format&fit=crop&w=1000&q=70" alt=""><div><h3>Semiconductor technology</h3><p>MOSFET, CMOS, FinFET, and gate-all-around devices; leakage and power; lithography, etching, and deposition.</p><span class="more">Explore theme</span></div></a>
+  <a class="rcard" href="#library" data-s="Advanced integrated circuits research" data-dom="semi"><img loading="lazy" src="https://images.unsplash.com/photo-1555664424-778a1e5e1b48?auto=format&fit=crop&w=1000&q=70" alt=""><div><h3>Advanced integrated circuits</h3><p>Low-power design with clock gating and multi-voltage domains, plus formal verification and timing closure for complex ICs.</p><span class="more">Explore theme</span></div></a>
+  <a class="rcard" href="#resources" data-s="Wireless communications research" data-dom="comm"><img loading="lazy" src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=800&q=70" alt=""><div><h3>Wireless communications</h3><p>Resilient links for 6G and challenging channels, with low-latency protocol design.</p><span class="more">Explore theme</span></div></a>
+  <a class="rcard" href="#resources" data-s="Signal processing research" data-dom="comm"><img loading="lazy" src="https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=800&q=70" alt=""><div><h3>Signal processing</h3><p>Estimation and adaptive filtering for noisy channels, with hardware-friendly implementations.</p><span class="more">Explore theme</span></div></a>
+  <a class="rcard" href="#programs" data-s="AI-assisted hardware research" data-dom="both"><img loading="lazy" src="https://images.unsplash.com/photo-1620712943543-bcc4688e7485?auto=format&fit=crop&w=800&q=70" alt=""><div><h3>AI-assisted hardware</h3><p>Machine learning to speed up chip design, verification, and test, and efficient accelerators for inference.</p><span class="more">Explore theme</span></div></a>
+  <a class="rcard" href="#library" data-s="Emerging computing research" data-dom="both"><img loading="lazy" src="https://images.unsplash.com/photo-1635070041078-e363dbe005cb?auto=format&fit=crop&w=800&q=70" alt=""><div><h3>Emerging computing</h3><p>RISC-V processors, chiplets and advanced packaging, and secure SoC architectures.</p><span class="more">Explore theme</span></div></a>
+ </div>
+</div></section>
+
+<!-- ===== CAREER (filled by JS) ===== -->
+<section class="acad" id="career"><div class="wrap"><h2>Career and placement</h2><p class="lead" id="careerLead"></p><ul class="roles" id="roleList"></ul></div></section>
+
+<!-- ===== NEWS ===== -->
+<section id="news"><div class="wrap">
+ <h2>News and discoveries</h2>
+ <p class="note">All stories below are illustrative samples, not real announcements.</p>
+ <div class="news">
+  <article class="card" data-s="Research discovery adaptive channel"><div class="im"><img loading="lazy" src="https://images.unsplash.com/photo-1532094349884-543bc11b234d?auto=format&fit=crop&w=700&q=70" alt=""></div><time>Sample, 12 Mar 2026</time><h3>Sample: Adaptive filters tame noisy channels</h3><p>An illustrative study on signal recovery in unstable links.</p></article>
+  <article class="card" data-s="Semiconductor innovation low-power chip"><div class="im"><img loading="lazy" src="https://images.unsplash.com/photo-1562408590-e32931084e23?auto=format&fit=crop&w=700&q=70" alt=""></div><time>Sample, 28 Feb 2026</time><h3>Sample: A low-power chip design approach</h3><p>An illustrative report on cutting energy per operation.</p></article>
+  <article class="card" data-s="Wireless technology 6G testbed"><div class="im"><img loading="lazy" src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=700&q=70" alt=""></div><time>Sample, 15 Jan 2026</time><h3>Sample: Student team builds a wireless testbed</h3><p>An illustrative project on low-latency links.</p></article>
+  <article class="card" data-s="Academic development new curriculum"><div class="im"><img loading="lazy" src="https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&w=700&q=70" alt=""></div><time>Sample, 4 Jan 2026</time><h3>Sample: New curriculum pairs hardware and AI</h3><p>An illustrative update on interdisciplinary courses.</p></article>
+ </div>
+</div></section>
+
+<!-- ===== CURRICULUM TRACKS ===== -->
+<section id="curriculum" data-dom="semi"><div class="wrap">
+ <h2>Learning tracks</h2>
+ <p class="lead">Each track is a sequence: later courses assume the earlier ones. Course names are illustrative.</p>
+ <div class="tracks">
+  <div data-s="RTL design track Verilog synthesis timing clock domain crossing"><h3>RTL design</h3><ol><li>Digital electronics</li><li>Computer architecture</li><li>Verilog</li><li>SystemVerilog</li><li>RTL design and FSMs</li><li>Synthesis</li><li>Timing</li><li>Clock domain crossing</li><li>Projects</li></ol></div>
+  <div data-s="Verification track assertions coverage UVM"><h3>Verification</h3><ol><li>Digital electronics</li><li>Verilog</li><li>SystemVerilog</li><li>Object-oriented programming</li><li>Assertions</li><li>Functional coverage</li><li>UVM</li><li>Projects</li></ol></div>
+  <div data-s="Physical design track floorplanning placement clock tree routing static timing analysis"><h3>Physical design</h3><ol><li>Digital electronics</li><li>CMOS</li><li>VLSI design</li><li>Synthesis</li><li>Floorplanning</li><li>Placement</li><li>Clock tree synthesis</li><li>Routing</li><li>Static timing analysis and timing closure</li></ol></div>
+ </div>
+</div></section>
+
+<!-- ===== CAMPUS ===== -->
+<section class="campus" id="campus"><div class="wrap">
+ <h2>Campus and community</h2>
+ <p class="lead">Labs, workshops, and shared studios where students and researchers build things together.</p>
+ <div class="mosaic">
+  <figure data-s="Engineering laboratories"><img loading="lazy" src="https://images.unsplash.com/photo-1581092160562-40aa08e78837?auto=format&fit=crop&w=1200&q=70" alt="Engineering laboratory"><figcaption>Engineering laboratories</figcaption></figure>
+  <figure data-s="Research facilities"><img loading="lazy" src="https://images.unsplash.com/photo-1532094349884-543bc11b234d?auto=format&fit=crop&w=700&q=70" alt="Research facility"><figcaption>Research facilities</figcaption></figure>
+  <figure data-s="Students working on projects"><img loading="lazy" src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=700&q=70" alt="Students working"><figcaption>Student projects</figcaption></figure>
+  <figure data-s="Academic collaboration"><img loading="lazy" src="https://images.unsplash.com/photo-1517048676732-d65bc937f952?auto=format&fit=crop&w=700&q=70" alt="Collaboration"><figcaption>Academic collaboration</figcaption></figure>
+  <figure><img loading="lazy" src="https://images.unsplash.com/photo-1523050854058-8df90110c9f1?auto=format&fit=crop&w=700&q=70" alt="Campus"><figcaption>Campus life</figcaption></figure>
+ </div>
+ <div class="two" data-dom="semi" data-s="Student projects competitions FIFO UART RISC-V AXI UVM cache arbiter">
+  <div><h3>Student projects</h3><p>From a 4-bit ripple carry adder and traffic light controller to a UART, an asynchronous FIFO with Gray-code pointers, an AXI4-Lite slave, and a pipelined RISC-V core. Advanced teams verify with UVM or formal methods.</p></div>
+  <div><h3>Engineering competitions</h3><p>Timed sprints on FSM state encoding, asynchronous FIFO depth, CDC handshakes, clock-gating power reduction, and maximum-frequency counter synthesis.</p></div>
+ </div>
+ <div class="two" data-dom="comm" data-s="Student projects competitions software-defined radio link budget adaptive filter antenna">
+  <div><h3>Student projects</h3><p>From a link budget calculator and a digital modulation simulator to a software-defined radio receiver, an adaptive equalizer, and an antenna measurement setup. Illustrative examples.</p></div>
+  <div><h3>Engineering competitions</h3><p>Timed sprints on channel estimation, modulation classification, filter design, and HF link planning. Illustrative examples.</p></div>
+ </div>
+ <a class="btn" href="#footer">Explore the campus</a>
+</div></section>
+
+<!-- ===== ABOUT ===== -->
+<section class="about" id="about"><div class="wrap">
+ <div><h2>About ECIT</h2>
+  <p class="lead" data-s="About ECIT institute vision">ECIT is a conceptual institute for electronics and communication engineering. This page is a design prototype: it makes no claims about accreditation, rankings, history, or research results.</p></div>
+ <div class="pts">
+  <div data-s="Academic vision"><h3>Academic vision</h3><p>Teach from fundamentals to systems, with studio and lab work in every year.</p></div>
+  <div data-s="Research priorities"><h3>Research priorities</h3><p>Semiconductors, wireless systems, signal processing, and AI-enabled hardware.</p></div>
+  <div data-s="Engineering focus"><h3>Engineering focus</h3><p>Build, measure, and iterate on real hardware and real signals, using simulators and FPGA flows such as Icarus Verilog, GTKWave, and Verilator.</p></div>
+ </div>
+</div></section>
+<div id="viewHost" aria-live="polite"></div>
+</main>
+
+<!-- ===== FOOTER ===== -->
+<footer id="footer"><div class="wrap">
+ <div class="fgrid">
+  <div><h3>ECIT</h3><p>Electronics and Communication Institute of Technology</p><p style="margin-top:12px">Address: [placeholder]<br>Phone: [placeholder]<br>Email: [placeholder]</p></div>
+  <div><h3>Academics</h3><a href="#academics">Disciplines</a><a href="#academics">Programs</a></div>
+  <div><h3>Research</h3><a href="#research">Themes</a><a href="#news">News</a></div>
+  <div><h3>Admissions</h3><a href="#pro">Apply</a><a href="#footer">Visit</a></div>
+  <div><h3>Campus</h3><a href="#campus">Facilities</a><a href="#campus">Community</a><h3 style="margin-top:12px">Social</h3><a href="#footer">Facebook (placeholder)</a><a href="#footer">LinkedIn (placeholder)</a><a href="#footer">YouTube (placeholder)</a></div>
+ </div>
+ <p class="legal">&copy; <span id="yr">2026</span> ECIT. Illustrative prototype; not an official institution.</p>
+</div></footer>
+
+<p class="sr" id="domainLive" aria-live="polite"></p>
+
+<!-- ===== SEARCH OVERLAY ===== -->
+<div id="search" role="dialog" aria-modal="true" aria-label="Search ECIT">
+ <div class="wrap">
+  <button class="icon sx" id="closeSearch" aria-label="Close search"><svg viewBox="0 0 24 24"><path d="M5 5l14 14M19 5L5 19"/></svg></button>
+  <label for="q" style="color:#aab">Search this site</label>
+  <input id="q" type="search" placeholder="Try wireless, VLSI, campus" autocomplete="off">
+  <div id="res" aria-live="polite"></div>
+ </div>
+</div>
+
+
+<div class="auth-overlay" id="authOverlay" aria-hidden="true">
+ <section class="auth-dialog" role="dialog" aria-modal="true" aria-labelledby="authTitle">
+  <button class="auth-close" id="authClose" type="button" aria-label="Close sign-in window">&times;</button>
+  <div class="auth-top">
+   <div class="auth-brand">
+    <img class="auth-logo" src="ecitw.png" alt="" onerror="this.onerror=null;this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 40 40%22%3E%3Crect width=%2240%22 height=%2240%22 fill=%22%23A90025%22/%3E%3Cpath d=%22M9 11h22M9 20h15M9 29h22M9 11v18%22 stroke=%22%23fff%22 stroke-width=%224%22 fill=%22none%22/%3E%3C/svg%3E'">
+    <span class="auth-institution">Electronics and<br>Communication<br>Institute of Technology</span>
+   </div>
+   <h2 id="authTitle">Welcome back</h2>
+   <p>Sign in to your ECIT account.</p>
+  </div>
+  <form class="auth-form" id="authForm">
+   <label class="auth-field"><span>Email address</span><input type="email" name="email" placeholder="name@example.com" autocomplete="username" required></label>
+   <label class="auth-field"><span>Password</span><input type="password" name="password" placeholder="Enter your password" autocomplete="current-password" required></label>
+   <div class="auth-options"><label><input type="checkbox" name="remember"> Remember me</label><a href="#forgot" id="forgotLink">Forgot password?</a></div>
+   <button class="auth-submit" type="submit">SIGN IN</button>
+   <div class="auth-foot">New to ECIT? <a href="#create-account" id="createAccountLink">Create an account</a></div>
+   <div class="auth-provider-divider">or continue with</div>
+   <div class="auth-providers">
+    <button class="auth-provider" type="button" data-provider="Google">
+     <svg viewBox="0 0 48 48" aria-hidden="true"><path fill="#4285F4" d="M43.6 24.5c0-1.4-.1-2.8-.4-4.1H24v7.8h11a9.4 9.4 0 0 1-4.1 6.2v5.1h6.7c3.9-3.6 6-8.8 6-15z"/><path fill="#34A853" d="M24 44c5.5 0 10.1-1.8 13.5-4.9l-6.7-5.1c-1.8 1.2-4 1.9-6.8 1.9-5.2 0-9.6-3.5-11.2-8.2H5.9v5.2A20 20 0 0 0 24 44z"/><path fill="#FBBC05" d="M12.8 27.7a12 12 0 0 1 0-7.4v-5.2H5.9a20 20 0 0 0 0 17.8z"/><path fill="#EA4335" d="M24 12.1c3 0 5.7 1 7.8 3.1l5.8-5.8C34.1 6.1 29.5 4 24 4A20 20 0 0 0 5.9 15.1l6.9 5.2C14.4 15.6 18.8 12.1 24 12.1z"/></svg>
+     Continue with Google
+    </button>
+    <button class="auth-provider" type="button" data-provider="Facebook">
+     <svg viewBox="0 0 24 24" aria-hidden="true"><rect width="24" height="24" rx="2" fill="#1877F2"/><path fill="#fff" d="M13.5 21v-8h2.7l.4-3.1h-3.1v-2c0-.9.3-1.5 1.6-1.5h1.7V3.6c-.3 0-1.3-.1-2.5-.1-2.5 0-4.2 1.5-4.2 4.3v2.1H7.3V13h2.8v8z"/></svg>
+     Continue with Facebook
+    </button>
+    <button class="auth-provider" type="button" data-provider="LinkedIn">
+     <svg viewBox="0 0 24 24" aria-hidden="true"><rect width="24" height="24" rx="2" fill="#0A66C2"/><path fill="#fff" d="M6.2 9h3v9.2h-3zm1.5-4.1a1.7 1.7 0 1 1 0 3.4 1.7 1.7 0 0 1 0-3.4zM11 9h2.9v1.3h.1a3.2 3.2 0 0 1 2.9-1.6c3.1 0 3.7 2 3.7 4.5v5h-3v-4.4c0-1.1 0-2.5-1.6-2.5s-1.9 1.2-1.9 2.4v4.5h-3z"/></svg>
+     Continue with LinkedIn
+    </button>
+   </div>
+   <p class="auth-note">Social sign-in is a visual preview. Connect the respective authentication services to enable access.</p>
+  </form>
+  <form class="auth-form auth-signup" id="authSignup" hidden>
+   <label class="auth-field"><span>Full name</span><input type="text" name="fullname" placeholder="Your full name" autocomplete="name" required></label>
+   <label class="auth-field"><span>Email address</span><input type="email" name="email" placeholder="name@example.com" autocomplete="email" required></label>
+   <label class="auth-field"><span>Create password</span><input type="password" name="password" placeholder="At least 8 characters" minlength="8" autocomplete="new-password" required></label>
+   <label class="auth-field"><span>Confirm password</span><input type="password" name="confirmPassword" placeholder="Re-enter password" minlength="8" autocomplete="new-password" required></label>
+   <button class="auth-submit" type="submit">CREATE ACCOUNT</button>
+   <div class="auth-foot">Already have an account? <a href="#signin" id="backToSignin">Sign in</a></div>
+   <p class="auth-note">Registration is a frontend preview. Connect an authentication service to create accounts securely.</p>
+  </form>
+ </section>
+</div>
+
+<script>
+/* ===== JS: all behaviours, vanilla ===== */
+(function(){
+ var $=function(s,c){return(c||document).querySelector(s)},$$=function(s,c){return[].slice.call((c||document).querySelectorAll(s))};
+ var nav=$('#nav'),menuBtn=$('#menuBtn'),srch=$('#search'),q=$('#q'),res=$('#res');
+ $('#yr').textContent=new Date().getFullYear();
+
+ /* Mega menus: click toggles, one open at a time */
+ function closeMenus(){$$('.nb[aria-controls]').forEach(function(b){b.setAttribute('aria-expanded','false');$('#'+b.getAttribute('aria-controls')).classList.remove('open')})}
+ $$('.nb[aria-controls]').forEach(function(b){b.addEventListener('click',function(e){
+  var open=b.getAttribute('aria-expanded')==='true';closeMenus();
+  if(!open){b.setAttribute('aria-expanded','true');$('#'+b.getAttribute('aria-controls')).classList.add('open')}
+  e.stopPropagation()})});
+ /* Menus no longer open on hover; the nav items go straight to their pages. */
+ document.addEventListener('click',function(e){if(!e.target.closest('nav'))closeMenus()});
+
+ /* Mobile menu */
+ menuBtn.addEventListener('click',function(){var o=nav.classList.toggle('open');menuBtn.setAttribute('aria-expanded',o)});
+ /* Phone menu closes by itself when the visitor taps anywhere outside it (on the page, or inside a section page). */
+ var navBackdrop=$('#navBackdrop');
+ new MutationObserver(function(){document.body.classList.toggle('nav-open',nav.classList.contains('open'))}).observe(nav,{attributes:true,attributeFilter:['class']});
+ navBackdrop.addEventListener('click',function(){closeNavMenu()});
+ function closeNavMenu(){if(nav.classList.contains('open')){nav.classList.remove('open');menuBtn.setAttribute('aria-expanded','false')}}
+ document.addEventListener('pointerdown',function(e){if(!nav.classList.contains('open'))return;if(e.target.closest('nav')||e.target.closest('#menuBtn'))return;closeNavMenu()});
+
+ /* Close menus after choosing a link (smooth scroll handled by CSS) */
+ document.addEventListener('click',function(e){if(e.target.closest('a[href^="#"]')){
+  closeMenus();nav.classList.remove('open');menuBtn.setAttribute('aria-expanded','false');closeSearch()}});
+
+ /* Search overlay */
+ /* ===== Domain switch (VLSI / Communication) =====
+    Edit DOMAINS to change content. cats: [title, blurb, [courses]]; res: [title, note];
+    prog: [title, blurb, [steps]]. Titles are illustrative. */
+/* ECIT shell API: section pages (courses.html, pro.html ...) register here to follow the header domain switch. */
+ var ECIT=window.ECIT={domain:'semi',_l:[],onDomain:function(fn){this._l.push(fn);try{fn(this.domain)}catch(err){console.error(err)}},_emit:function(d){this.domain=d;this._l.forEach(function(fn){try{fn(d)}catch(err){console.error(err)}})}};
+ var KEY='ecit-domain',root=document.documentElement,seg=$('#seg');
+ var DOMAINS={
+  semi:{label:'Semiconductor',name:'semiconductor',img:'https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=2000&h=1100&q=75',alt:'Close view of an electronic circuit board',
+   h:'Designing the chips that power modern technology',
+   p:'From RTL and verification to physical design and semiconductor devices, ECIT teaches how integrated circuits are specified, built, and proven.',
+   cats:[['RTL Design','Synthesizable Verilog, FSMs, datapaths and pipelining.',['Verilog HDL from Scratch','Advanced RTL Design with Verilog']],
+    ['SystemVerilog','Data types, interfaces, classes and assertions.',['SystemVerilog Programming','Advanced SystemVerilog and Assertions']],
+    ['Design Verification','Testbenches, coverage, and scalable UVM environments.',['Functional Verification Fundamentals','UVM Advanced Verification']],
+    ['Physical Design','Floorplanning to signoff, with static timing analysis.',['Physical Design: RTL to Tapeout','Static Timing Analysis']],
+    ['Analog IC Design','Circuit simulation and the analog blocks inside chips.',['LTspice and SPICE Circuit Simulation','Op-Amp and PLL Fundamentals']],
+    ['Semiconductor Technology','Devices, CMOS, and power-aware design.',['Semiconductor Devices and CMOS Fundamentals','Low Power VLSI Design with UPF']],
+    ['VLSI Projects','Build a design from specification to FPGA or tapeout.',['VLSI Fundamentals Project: RTL to FPGA','Tapeout-Ready VLSI Capstone']]],
+   res:[['Verilog Syntax Cheat Sheet','Syntax, operators and coding rules'],['FSM Design Handbook','Moore, Mealy and state encoding'],['SystemVerilog Assertions Cheat Sheet','Sequences, properties and checks'],['UVM Testbench Templates','Agents, sequences and scoreboards'],['STA Terms Glossary','Setup, hold, slack and skew'],['Setup and Hold Formulas','Timing equations with worked checks'],['MOSFET Basics Notes','Device operation and CMOS logic'],['Simulation Tool Guides','Icarus Verilog, GTKWave and Verilator']],
+   library:[
+    ['Digital Design','Logic design, RTL, FSMs, timing, and datapaths.',['Boolean algebra','Combinational logic','Sequential logic','FSM design','Verilog and SystemVerilog']],
+    ['Verification and Testing','Simulation, assertions, coverage, and test methodologies.',['Testbench architecture','SystemVerilog Assertions','Functional coverage','UVM concepts','Design for Test']],
+    ['Physical Design','Implementation from synthesized netlist to signoff.',['Synthesis','Floorplanning','Placement','Clock-tree synthesis','Routing and static timing']],
+    ['Devices and Circuits','Semiconductor device fundamentals and integrated circuits.',['PN junctions','MOSFET operation','CMOS logic','FinFET and GAA devices','Analog IC fundamentals']],
+    ['Architecture and Tools','Processor architecture and practical design tools.',['RISC-V ISA','Pipelining','Memory hierarchy','Icarus Verilog','GTKWave and Verilator']],
+    ['Reference Sheets','Compact formulas, definitions, and design checklists.',['Timing equations','Logic identities','Power and delay','Verification checklist','RTL coding checklist']]
+   ],
+   roles:['RTL Design Engineer','Design Verification Engineer','Physical Design Engineer','DFT Engineer','Analog Layout Engineer','FPGA Engineer']},
+  comm:{label:'Communication',name:'communication',img:'https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=2000&h=1100&q=75',alt:'Global communication network visualization',
+   h:'Engineering the links that connect the world',
+   p:'From signal processing and antennas to HF links and 6G, ECIT teaches how information moves reliably through noisy channels.',
+   cats:[['Wireless Communication','Channels, fading, MIMO and OFDM.',['Wireless Channels and Fading','Digital Modulation and Coding']],
+    ['Digital Signal Processing','Discrete-time systems, filters and estimation.',['Discrete-Time Signals and Systems','Adaptive Filtering']],
+    ['RF and Microwave Engineering','Transmission lines, RF circuits and microwave systems.',['RF Circuit Design Basics','Microwave Engineering']],
+    ['Antenna Design','Antenna theory, arrays, simulation and measurement.',['Antenna Theory and Arrays','Antenna Simulation and Measurement']],
+    ['HF/VHF Communication','Ionospheric propagation and link design.',['Ionospheric Propagation and HF Links','VHF/UHF Link Budgeting']],
+    ['5G/6G','The 5G NR physical layer and learning-based 6G.',['5G NR Physical Layer','Learning-Based 6G Communications']],
+    ['Communication Systems','Analog and digital systems, from theory to radio.',['Analog and Digital Communication','Software-Defined Radio Lab']]],
+   res:[['Modulation Schemes Reference','BPSK to QAM, bandwidth and BER'],['Link Budget Worksheet','Path loss, noise and margin'],['Channel Models Notes','Fading, delay spread and Doppler'],['Filter Design Cheat Sheet','FIR, IIR and adaptive filters'],['Antenna Parameters Reference','Gain, pattern, impedance and bandwidth'],['HF Propagation Notes','Ionosphere layers, MUF and fading'],['5G NR Overview','Numerology, frames and channels'],['SDR Starter Guide','GNU Radio and basic receiver chains']],
+   library:[
+    ['LTE and LTE-Advanced','Radio access architecture and LTE protocol concepts.',['LTE architecture','LTE physical layer','LTE-Advanced features','Carrier aggregation','LTE-M and NB-IoT']],
+    ['5G NR Physical Layer','NR numerology, frame structure, channels, and procedures.',['NR numerology','Frame and slot structure','Physical channels','Bandwidth parts','Synchronization and reference signals']],
+    ['PHY and Protocol Stack','Core physical-layer and radio-protocol mechanisms.',['Channel coding','Modulation and waveform','MAC and scheduling','RLC and PDCP','RRC procedures']],
+    ['MIMO and Beam Management','Multi-antenna transmission, feedback, and spatial processing.',['MIMO fundamentals','CSI and feedback','Beam management','Precoding','Massive MIMO and OFDM']],
+    ['RF, Antennas, and Propagation','Radio-frequency systems and propagation fundamentals.',['Antenna parameters','RF link budget','Channel models','Fading and Doppler','HF/VHF propagation']],
+    ['Research and Advanced Topics','Advanced communication concepts and implementation references.',['AI/ML for PHY','Channel estimation','Positioning','NTN concepts','HF ionosphere and MUF']]
+   ],
+   roles:['RF Engineer','Wireless Systems Engineer','DSP Engineer','Antenna Engineer','5G/6G Researcher','Communication Software Engineer']}
+ };
+ var items=[];
+ /* Search index: only visible [data-s] items, rebuilt after each domain change */
+ function indexItems(){items=$$('[data-s]').filter(function(el){return !el.closest('#viewHost,[hidden]')}).map(function(el){
+  var sec=el.closest('section,footer'),t=el.getAttribute('data-s')||'',h=$('h3',el);
+  return{el:el,sec:sec,title:h?h.textContent:t,text:(el.textContent+' '+t).toLowerCase()}})}
+ function li(a){return a.map(function(x){return '<li>'+x+'</li>'}).join('')}
+ function links(arr,pre,from,to){return arr.slice(from,to).map(function(x,i){return [x[0]||x,'#'+pre+(from+i)]})}
+ function mega(id,cols){$('#'+id+' .wrap').innerHTML=cols.map(function(c){return '<div><h3>'+c[0]+'</h3>'+(c[1]?'<p>'+c[1]+'</p>':'')+c[2].map(function(l){return '<a'+(l[2]?' class="more"':'')+' href="'+l[1]+'">'+l[0]+'</a>'}).join('')+'</div>'}).join('')}
+ /* Hero: the image fills the hero box, so both domains share one box size. The box is sized for the longer of the two texts. */
+ function lockHero(d){
+  var hero=$('.hero'),h1=$('#heroH'),p=$('#heroP'),wrap=$('.hero .wrap');if(!hero||!wrap)return;
+  hero.style.minHeight='';
+  var cssMin=parseFloat(getComputedStyle(hero).minHeight)||0,tall=0;
+  Object.keys(DOMAINS).forEach(function(k){h1.textContent=DOMAINS[k].h;p.textContent=DOMAINS[k].p;tall=Math.max(tall,wrap.getBoundingClientRect().height)});
+  h1.textContent=DOMAINS[d].h;p.textContent=DOMAINS[d].p;
+  hero.style.minHeight=Math.ceil(Math.max(cssMin,tall))+'px';
+ }
+ var heroTimer;window.addEventListener('resize',function(){clearTimeout(heroTimer);heroTimer=setTimeout(function(){lockHero(ECIT.domain)},120)});
+ window.addEventListener('load',function(){lockHero(ECIT.domain)});
+ function applyDomain(d){
+  var D=DOMAINS[d];if(!D)return;ECIT.domain=d;
+  root.setAttribute('data-domain',d);seg.setAttribute('data-domain',d);
+  $$('button',seg).forEach(function(b){var on=b.getAttribute('data-d')===d;b.setAttribute('aria-checked',on);b.tabIndex=on?0:-1});
+  $('#heroH').textContent=D.h;$('#heroP').textContent=D.p;var im=$('#heroImg');im.src=D.img;im.alt=D.alt;lockHero(d);
+  $('#catLead').textContent='Seven '+D.name+' areas, each with sample courses. Course titles are illustrative.';
+  $('#catGrid').innerHTML=D.cats.map(function(c,i){return '<article class="cat" id="cat-'+i+'" data-s="'+c[0]+' '+c[2].join(' ')+'"><h3>'+c[0]+'</h3><p>'+c[1]+'</p><ul>'+li(c[2])+'</ul></article>'}).join('');
+  /* Learning-resource notes and guides are integrated into existing Technical Library categories. */
+  $('#libraryLead').textContent='Browse structured '+D.name+' references by topic. Use these categories to organize detailed notes, equations, diagrams, simulations, and external references.';
+  var resourceCategory=d==='comm'?[1,4,4,5,4,5,1,5]:[0,0,1,1,2,2,3,4];
+  var libraryWithResources=D.library.map(function(c,i){var additions=D.res.filter(function(r,j){return resourceCategory[j]===i}).map(function(r){return r[0]+' — '+r[1]});return [c[0],c[1],c[2].concat(additions)]});
+  $('#libraryGrid').innerHTML=libraryWithResources.map(function(c,i){return '<article class="library-card" id="lib-'+i+'" data-s="'+c[0]+' '+c[1]+' '+c[2].join(' ')+'"><h3>'+c[0]+'</h3><p>'+c[1]+'</p><ul>'+c[2].map(function(topic){return '<li>'+topic+'</li>'}).join('')+'</ul></article>'}).join('');
+  $('#careerLead').textContent='Roles that '+D.name+' training could lead to. These are illustrative; ECIT makes no placement claims.';
+  $('#roleList').innerHTML=li(D.roles);
+  $$('[data-dom]').forEach(function(el){var v=el.getAttribute('data-dom');el.hidden=!(v==='both'||v===d)});
+  /* Mega menus follow the selected domain */
+  var L=function(t,h){return [t,h,1]};
+  mega('m4',[['Roles','',D.roles.slice(0,3).map(function(x){return [x,'#career']})],['More roles','',D.roles.slice(3).map(function(x){return [x,'#career']})],['Career and placement','Illustrative roles, with no placement statistics.',[L('Explore careers','#career')]]]);
+  ECIT._emit(d);
+  indexItems();
+ }
+ function setDomain(d){applyDomain(d);try{localStorage.setItem(KEY,d)}catch(e){}$('#domainLive').textContent='Showing '+DOMAINS[d].label+' content'}
+ function loadDomain(){try{var v=localStorage.getItem(KEY);if(v==='vlsi')v='semi';return DOMAINS[v]?v:'semi'}catch(e){return'semi'}}
+ seg.addEventListener('click',function(e){var b=e.target.closest('button');if(b)setDomain(b.getAttribute('data-d'))});
+ /* Radio-group keyboard support: arrows, Home, End */
+ seg.addEventListener('keydown',function(e){var k=e.key;if(['ArrowLeft','ArrowRight','ArrowUp','ArrowDown','Home','End'].indexOf(k)<0)return;
+  e.preventDefault();var n=(k==='ArrowLeft'||k==='ArrowUp'||k==='Home')?'semi':'comm';setDomain(n);$('[data-d="'+n+'"]',seg).focus()});
+
+ var searchScrollY=0, searchBodyStyles=null;
+ function openSearch(){
+  if(srch.classList.contains('open'))return;
+  searchScrollY=window.scrollY||window.pageYOffset||document.documentElement.scrollTop||0;
+  searchBodyStyles={position:document.body.style.position,top:document.body.style.top,width:document.body.style.width,overflow:document.body.style.overflow,htmlOverflow:document.documentElement.style.overflow};
+  document.body.style.position='fixed';document.body.style.top=(-searchScrollY)+'px';document.body.style.width='100%';document.body.style.overflow='hidden';document.documentElement.style.overflow='hidden';
+  srch.classList.add('open');q.value='';res.innerHTML='';q.focus({preventScroll:true});
+ }
+ function closeSearch(){
+  if(!srch.classList.contains('open'))return;
+  srch.classList.remove('open');
+  var y=searchScrollY, st=searchBodyStyles;
+  document.body.style.position=st?st.position:'';document.body.style.top=st?st.top:'';document.body.style.width=st?st.width:'';document.body.style.overflow=st?st.overflow:'';document.documentElement.style.overflow=st?st.htmlOverflow:'';
+  /* Restore instantly so global smooth-scroll styles cannot move the page afterward. */
+  var oldBehavior=document.documentElement.style.scrollBehavior;document.documentElement.style.scrollBehavior='auto';window.scrollTo(0,y);document.documentElement.scrollTop=y;document.body.scrollTop=y;document.documentElement.style.scrollBehavior=oldBehavior;
+  searchBodyStyles=null;$('#searchBtn').focus({preventScroll:true});
+ }
+ // Keep in-page links functional across both domain views, including dynamically rendered cards.
+ document.addEventListener('click',function(e){var a=e.target.closest('a[href^="#"]');if(!a)return;var id=a.getAttribute('href').slice(1);if(id==='signin'){e.preventDefault();openAuth();return;}
+  var target=id?document.getElementById(id):null;if(!target||target.closest('#viewHost'))return;
+  e.preventDefault();
+  var go=function(){target.scrollIntoView({behavior:'smooth',block:'start'});history.replaceState(null,'','#'+id)};
+  /* A home-page anchor clicked from a section page: show the home page first (header untouched), then scroll. */
+  if(target.closest('main')&&document.body.classList.contains('show-view')){showPage('home',false);setTimeout(go,30)}else go();
+ });
+ 
+ var authOverlay=$('#authOverlay'),authClose=$('#authClose'),authForm=$('#authForm'),previousFocus=null;
+ function openAuth(){previousFocus=document.activeElement;authOverlay.classList.add('open');authOverlay.setAttribute('aria-hidden','false');document.body.style.overflow='hidden';authOverlay.querySelector('input[type=email]').focus()}
+ function closeAuth(){authOverlay.classList.remove('open');authOverlay.setAttribute('aria-hidden','true');document.body.style.overflow='';if(previousFocus&&previousFocus.focus)previousFocus.focus()}
+ authClose.addEventListener('click',closeAuth);
+ authOverlay.addEventListener('click',function(e){if(e.target===authOverlay)closeAuth()});
+ document.addEventListener('keydown',function(e){if(e.key==='Escape'&&authOverlay.classList.contains('open'))closeAuth()});
+ authForm.addEventListener('submit',function(e){e.preventDefault();alert('Sign-in is a visual preview. Connect an authentication service to verify credentials.');});
+ authOverlay.querySelectorAll('[data-provider]').forEach(function(btn){btn.addEventListener('click',function(){alert(btn.dataset.provider+' sign-in is not connected yet.');});});
+ $('#forgotLink').addEventListener('click',function(e){e.preventDefault();alert('Password recovery is not configured yet.')});
+ var authTitle=$('#authTitle'),authSubtitle=authOverlay.querySelector('.auth-top p'),signinForm=$('#authForm'),signupForm=$('#authSignup');
+ $('#createAccountLink').addEventListener('click',function(e){e.preventDefault();signinForm.hidden=true;signupForm.hidden=false;authTitle.textContent='Create your account';authSubtitle.textContent='Join the ECIT learning community.';signupForm.querySelector('input').focus()});
+ $('#backToSignin').addEventListener('click',function(e){e.preventDefault();signupForm.hidden=true;signinForm.hidden=false;authTitle.textContent='Welcome back';authSubtitle.textContent='Sign in to your ECIT account.';signinForm.querySelector('input[type=email]').focus()});
+ signupForm.addEventListener('submit',function(e){e.preventDefault();var pw=signupForm.elements.password.value,confirm=signupForm.elements.confirmPassword.value;if(pw!==confirm){alert('Passwords do not match.');return;}alert('Account creation is a visual preview. Connect an authentication service to register.');});
+ 
+ $('#searchBtn').addEventListener('click',openSearch);$('#closeSearch').addEventListener('click',closeSearch);
+ srch.addEventListener('click',function(e){if(!e.target.closest('button,input,a,label'))closeSearch()});
+ q.addEventListener('input',function(){
+  var v=q.value.trim().toLowerCase();res.innerHTML='';if(!v)return;
+  var hits=items.filter(function(i){return i.text.indexOf(v)>-1}).slice(0,12);
+  if(!hits.length){res.innerHTML='<p style="padding:16px 0;color:#aab">No results. Try a broader word such as research or campus.</p>';return}
+  hits.forEach(function(h){
+   var a=document.createElement('a');a.href='#';
+   a.innerHTML='<b></b><span></span>';$('b',a).textContent=h.title;
+   $('span',a).textContent='In '+(h.sec&&h.sec.id?h.sec.id:'page');
+   a.addEventListener('click',function(e){e.preventDefault();closeSearch();var go=function(){h.el.scrollIntoView({behavior:'smooth',block:'center'});
+     h.el.style.outline='3px solid #A90025';setTimeout(function(){h.el.style.outline=''},1800)};
+    if(document.body.classList.contains('show-view')){showPage('home',false);setTimeout(go,30)}else go()});
+   res.appendChild(a)})});
+
+ /* Escape closes overlays; Tab stays inside search overlay */
+ document.addEventListener('keydown',function(e){
+  if(e.key==='Escape'){closeSearch();closeMenus();nav.classList.remove('open')}
+  if(e.key==='/'&&!/input|textarea/i.test(document.activeElement.tagName)){e.preventDefault();openSearch()}
+  if(e.key==='Tab'&&srch.classList.contains('open')){
+   var f=$$('button,input',srch),first=f[0],last=f[f.length-1];
+   if(e.shiftKey&&document.activeElement===first){e.preventDefault();last.focus()}
+   else if(!e.shiftKey&&document.activeElement===last){e.preventDefault();first.focus()}}});
+applyDomain(loadDomain());
+
+ /* ===== View router =====
+    Each section page lives in its own file and is fetched into #viewHost on first visit, then kept.
+    Only #viewHost changes: the header, domain switch, search and sign-in dialog are never reloaded. */
+ var VIEWS={courses:{file:'courses.html',hash:'#courses',nav:'Courses'},certifications:{file:'certifications.html',hash:'#certifications',nav:'Certifications'},career:{file:'career-placement.html',hash:'#career-page',nav:'Career & Placements'},library:{file:'technical-library.html',hash:'#technical-library',nav:'Technical Library'},about:{file:'About-ECIT.html',hash:'#about-ecit',nav:'About ECIT'},pro:{file:'pro.html',hash:'#pro',nav:'Pro'},prep:{file:'prep-arena.html',hash:'#prep-arena',nav:'Prep Arena'}};
+ var ROUTES={'#certifications':'certifications','#courses':'courses','#programs':'courses','#programs-page':'courses','#career':'career','#career-page':'career','#technical-library':'library','#learning-resources':'library','#resources':'library','#about-ecit':'about','#pro':'pro','#prep-arena':'prep'};
+ var NAVPAGE={};Object.keys(VIEWS).forEach(function(k){NAVPAGE[VIEWS[k].nav]=k});
+ var host=$('#viewHost');
+ /* Each section is its own .html file shown in an <iframe> inside #viewHost. iframes work from disk (file://) as well as over http,
+    and only #viewHost changes, so the header, domain switch, search and sign-in dialog are never reloaded.
+    Messages: parent -> section {ecit:'domain'}; section -> parent {ecit:'height'|'link'|'ready'}. */
+ function frameOf(name){return host.querySelector('iframe[data-view="'+name+'"]')}
+ function loadView(name){
+  if(frameOf(name))return;
+  var f=document.createElement('iframe');
+  f.className='view-frame';f.setAttribute('data-view',name);f.title=VIEWS[name].nav;f.src=VIEWS[name].file+'?d='+ECIT.domain;
+  host.appendChild(f);
+ }
+ function tellFrame(f,d){try{f.contentWindow.postMessage({ecit:'domain',domain:d},'*')}catch(err){}}
+ ECIT.onDomain(function(d){[].forEach.call(host.querySelectorAll('iframe'),function(f){tellFrame(f,d)})});
+ window.addEventListener('message',function(e){
+  var m=e.data;if(!m||typeof m!=='object'||!m.ecit)return;
+  var f=[].filter.call(host.querySelectorAll('iframe'),function(x){return x.contentWindow===e.source})[0];if(!f)return;
+  if(m.ecit==='height'){if(m.h>0)f.style.height=Math.ceil(m.h)+'px'}
+  else if(m.ecit==='ready'){tellFrame(f,ECIT.domain)}
+  else if(m.ecit==='tap'){closeNavMenu()}
+  else if(m.ecit==='set-domain'&&(m.domain==='semi'||m.domain==='comm')){setDomain(m.domain)}
+  else if(m.ecit==='enrol'){
+   var contact=document.querySelector('#footer');
+   if(contact){contact.scrollIntoView({behavior:'smooth',block:'start'});}
+   else{location.hash='#footer';}
+  }
+  else if(m.ecit==='link'&&/^#[A-Za-z0-9_-]*$/.test(String(m.href))){var a=document.createElement('a');a.href=m.href;a.style.display='none';document.body.appendChild(a);a.click();a.remove()}
+ });
+ function showPage(page,push){
+  document.body.classList.toggle('show-view',page!=='home');
+  if(page!=='home')loadView(page);
+  [].forEach.call(host.children,function(el){el.hidden=el.getAttribute('data-view')!==page});
+  var cur=page==='home'?'':VIEWS[page].nav;
+  $$('#nav .nb').forEach(function(el){var on=!!cur&&el.textContent.trim()===cur;el.classList.toggle('is-current',on);if(on)el.setAttribute('aria-current','page');else el.removeAttribute('aria-current')});
+  if(push){var h=page==='home'?'#top':VIEWS[page].hash;try{history.pushState({page:page},'',h)}catch(err){try{location.hash=h}catch(e2){}}}
+  window.scrollTo(0,0);
+ }
+ document.addEventListener('click',function(e){
+  var navEl=e.target.closest('#nav .nb'),page=navEl&&NAVPAGE[navEl.textContent.trim()];
+  if(!page){var a=e.target.closest('a[href^="#"]');page=a&&ROUTES[a.getAttribute('href')]}
+  var home=!page&&e.target.closest('.brand')&&document.body.classList.contains('show-view');
+  if(!page&&!home)return;
+  e.preventDefault();e.stopImmediatePropagation();
+  closeMenus();nav.classList.remove('open');menuBtn.setAttribute('aria-expanded','false');closeSearch();
+  showPage(page||'home',true);
+ },true);
+ window.addEventListener('popstate',function(){showPage(ROUTES[location.hash]||'home',false)});
+ if(ROUTES[location.hash])showPage(ROUTES[location.hash],false);
+})();
+</script>
+<script>
+/* Homepage keyword links: connect relevant terms to existing homepage sections/views without changing layout or styling. */
+(function(){
+ const root=document.querySelector('main#top'); if(!root)return;
+ const routes=[
+  [/technical library|technical references/ig,'#technical-library'],
+  [/learning resources|study resources|reference materials|cheat sheets|tool guides|notes and references/ig,'#technical-library'],
+  [/career and placement|career pathways|placement preparation|career opportunities/ig,'#career-page'],
+  [/learning tracks|learning paths|curriculum/ig,'#curriculum'],
+  [/semiconductor technology|semiconductor devices|semiconductors|vlsi|integrated circuits|chip design|cmos|mosfet/ig,'#academics'],
+  [/wireless communications|wireless communication|hf communication|ionospheric propagation|5g|6g|mimo|ofdm|antenna design|rf engineering/ig,'#technical-library'],
+  [/signal processing|digital signal processing|adaptive filtering|channel estimation/ig,'#technical-library'],
+  [/research and innovation|research themes|research priorities/ig,'#research'],
+  [/news and discoveries|research discovery|technology news/ig,'#news'],
+  [/campus and community|engineering laboratories|student projects|engineering competitions/ig,'#campus'],
+  [/programs|learning program/ig,'#programs-page'],
+  [/courses|course areas|course modules/ig,'#courses']
+ ];
+ const skip=new Set(['A','SCRIPT','STYLE','NOSCRIPT','TEXTAREA','INPUT','BUTTON']);
+ const walker=document.createTreeWalker(root,NodeFilter.SHOW_TEXT,{acceptNode(n){
+  if(!n.nodeValue.trim()||skip.has(n.parentElement?.tagName)||n.parentElement?.closest('a,button,[contenteditable="true"]'))return NodeFilter.FILTER_REJECT;
+  if(n.parentElement?.closest('.course-view,.resources-view,.programs-view,.career-view,.library-view,.about-ecit-view'))return NodeFilter.FILTER_REJECT;
+  return NodeFilter.FILTER_ACCEPT;
+ }});
+ const nodes=[];while(walker.nextNode())nodes.push(walker.currentNode);
+ nodes.forEach(node=>{
+  let text=node.nodeValue, matches=[];
+  routes.forEach(([re,href])=>{re.lastIndex=0;let m;while((m=re.exec(text))!==null){matches.push({start:m.index,end:m.index+m[0].length,term:m[0],href});if(!m[0].length)re.lastIndex++;}});
+  matches.sort((a,b)=>a.start-b.start||(b.end-b.start)-(a.end-a.start));
+  const chosen=[];let end=-1;matches.forEach(m=>{if(m.start>=end){chosen.push(m);end=m.end;}});
+  if(!chosen.length)return;
+  const frag=document.createDocumentFragment();let pos=0;
+  chosen.forEach(m=>{if(m.start>pos)frag.append(document.createTextNode(text.slice(pos,m.start)));const a=document.createElement('a');a.href=m.href;a.textContent=m.term;frag.append(a);pos=m.end;});
+  if(pos<text.length)frag.append(document.createTextNode(text.slice(pos)));node.replaceWith(frag);
+ });
+})();
+</script>
+
+<script>
+/* Scroll reveal (additive). Content stays visible if JS or IntersectionObserver is unavailable. */
+(function(){if(!('IntersectionObserver'in window))return;var d=document.documentElement;d.classList.add('js');
+var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})},{threshold:.12});
+document.querySelectorAll('.rv').forEach(function(el,i){el.style.transitionDelay=(i%5)*70+'ms';io.observe(el)});
+document.querySelectorAll('.cat,.library-card,.rcard,.card,.blk').forEach(function(el){el.classList.add('rv');io.observe(el)});})();
+</script>
+</body>
+</html>

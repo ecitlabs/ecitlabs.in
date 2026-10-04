@@ -1,0 +1,168 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Career &amp; Placement | ECIT</title>
+<script>
+/* ECIT section shim: lets this file run inside the ECIT site frame (index.html) with the shared header.
+   Opened on its own, it sends the visitor to the full site. */
+(function(){
+ if(window.parent===window){location.replace('index.html#career-page');return}
+ var q=/[?&]d=(semi|comm)/.exec(location.search),de=document.documentElement;
+ var E=window.ECIT={domain:q?q[1]:'semi',_l:[],onDomain:function(fn){this._l.push(fn);try{fn(this.domain)}catch(err){console.error(err)}}};
+ de.setAttribute('data-domain',E.domain);
+ function post(m){try{parent.postMessage(m,'*')}catch(err){}}
+ window.addEventListener('message',function(e){var m=e.data;if(!m||m.ecit!=='domain'||(m.domain!=='semi'&&m.domain!=='comm')||m.domain===E.domain)return;
+  E.domain=m.domain;de.setAttribute('data-domain',m.domain);E._l.forEach(function(fn){try{fn(m.domain)}catch(err){console.error(err)}})});
+ var last=0;
+ function size(){var h=Math.ceil(document.body.getBoundingClientRect().height);if(h&&h!==last){last=h;post({ecit:'height',h:h})}}
+ window.addEventListener('load',function(){size();post({ecit:'ready'})});
+ window.addEventListener('resize',size);
+ document.addEventListener('DOMContentLoaded',function(){
+  if(window.ResizeObserver)new ResizeObserver(size).observe(document.body);else setInterval(size,400);
+  size();
+ });
+ document.addEventListener('pointerdown',function(){post({ecit:'tap'})},true);
+ document.addEventListener('click',function(e){var a=e.target.closest&&e.target.closest('a[href^="#"]');if(!a)return;e.preventDefault();post({ecit:'link',href:a.getAttribute('href')})});
+})();
+</script>
+<style>
+/* Page basics shared with the ECIT shell, so this section looks the same inside the site frame. */
+:root{--ink:#171A1E;--red:#A90025;--white:#fff;--soft:#F3F4F5;--gray:#777;--serif:Georgia,"Times New Roman",serif;--sans:"Helvetica Neue",Arial,sans-serif;--s1:8px;--s2:16px;--s3:24px;--s4:48px;--s5:96px;--max:1240px}
+*{box-sizing:border-box;margin:0}
+html{-webkit-text-size-adjust:100%}
+body{overflow-wrap:break-word;font-family:var(--sans);color:var(--ink);line-height:1.6;background:var(--white)}
+img{display:block;width:100%;height:100%;object-fit:cover;background:#2a2f36}
+a{color:inherit;text-decoration:none}
+:focus-visible{outline:3px solid var(--red);outline-offset:2px}
+.wrap{max-width:var(--max);margin:0 auto;padding:0 var(--s3)}
+h1,h2,h3{font-family:var(--serif);font-weight:400;line-height:1.15}
+h2{font-size:clamp(2rem,4vw,3rem);margin-bottom:var(--s3)}
+.lead{max-width:62ch;color:#454a52;font-size:1.1rem}
+.btn{display:inline-block;padding:14px 26px;font-weight:600;border:2px solid var(--red);background:var(--red);color:#fff;cursor:pointer;font:inherit;font-weight:600;transition:background .2s,color .2s}
+.btn:hover{background:#fff;color:var(--red)}
+.more{color:var(--red);font-weight:600;border-bottom:2px solid transparent}
+.more:hover{border-color:var(--red)}
+/* Same desktop density as the ECIT shell (15px root on wide screens), so text sizes match the original site. */
+@media(min-width:1101px){
+ html{font-size:15px}
+ :root{--s5:64px;--max:1400px}
+ .lead{font-size:1rem}
+ h2{font-size:clamp(1.8rem,2.6vw,2.5rem);margin-bottom:var(--s2)}
+ .btn{padding:12px 22px}
+}
+/* The site frame sizes itself to this content, so sections must not fill the viewport. */
+section[class$="-view"]{display:block!important;min-height:0!important}
+</style>
+<style>
+.career-view{min-height:calc(100vh - 78px);padding:58px max(24px,calc((100% - 1240px)/2)) 80px;background:#fff}
+.career-view .eyebrow{font-size:12px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#A90025}
+.career-view h1{font:400 clamp(2rem,4vw,3rem) Georgia,serif;margin:8px 0 12px}
+.career-view .intro{max-width:780px;color:#555;margin-bottom:30px}
+.career-view .career-section{margin:34px 0}
+.career-view .career-section h2{font:400 26px Georgia,serif;margin-bottom:16px}
+.career-view .career-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+.career-view .career-card{border:1px solid #dfe1e4;padding:20px;background:#fff;display:flex;flex-direction:column;gap:10px}
+.career-view .career-card h3{font:600 18px Arial,sans-serif}
+.career-view .career-card p,.career-view .career-card li{font-size:14px;color:#4d5158}
+.career-view .career-card ol,.career-view .career-card ul{padding-left:19px;margin:0}
+.career-view .career-tag{font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:#A90025;font-weight:700}
+.career-view .career-note{background:#f4f5f6;padding:18px;color:#454a52;font-size:14px}
+@media(max-width:900px){.career-view .career-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:600px){.career-view .career-grid{grid-template-columns:1fr}.career-view{padding:42px 18px 60px}}
+/* Company directory: same look as the Courses page (filters, search, cards) */
+.career-view .company-directory{margin-top:48px}
+.career-view .company-directory .eyebrow{font-size:12px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#A90025}
+.career-view .company-directory h2{font:400 26px Georgia,serif;margin:8px 0 12px}
+.career-view .company-directory .intro{max-width:760px;color:#555;margin-bottom:28px}
+.career-view .company-directory .toolbar{display:flex;flex-direction:column;gap:16px;margin-bottom:26px}
+.career-view .company-directory .filters{display:flex;flex-wrap:wrap;gap:8px}
+.career-view .company-directory .filters button{border:1px solid #d4d7da;background:#fff;padding:8px 14px;cursor:pointer;font:inherit}
+.career-view .company-directory .filters button.active,.career-view .company-directory .filters button:hover{background:#171A1E;color:#fff}
+.career-view .company-directory input{max-width:420px;width:100%;padding:12px 14px;border:1px solid #c8cbd0;font:inherit}
+.career-view .company-directory .grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}
+.career-view .company-directory .card{border:1px solid #dfe1e4;padding:22px;background:#fff}
+.career-view .company-directory .tag{font-size:11px;text-transform:uppercase;letter-spacing:.08em;color:#A90025;font-weight:700}
+.career-view .company-directory .card h2{font:600 20px Arial,sans-serif;margin:10px 0}
+.career-view .company-directory .card p{font-size:14px;color:#555;margin-bottom:14px}
+.career-view .company-directory .card a{font-size:13px;font-weight:700;color:#A90025}
+.career-view .company-directory .empty{display:none;color:#555}
+.career-view .company-directory .career-note{margin-top:26px}
+@media(max-width:900px){.career-view .company-directory .grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:600px){.career-view .company-directory .grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<section class="career-view" id="careerView">
+<div class="eyebrow">ECIT Careers</div><h1 id="careerHeading">Career and Placement</h1>
+<p class="intro" id="careerIntro">Explore role-based course bundles, practical projects, and preparation resources across semiconductor and communication technologies.</p>
+<div class="career-section"><h2>Career pathways and course bundles</h2><div class="career-grid" id="careerBundleGrid"></div></div>
+<div class="career-section"><h2>Placement preparation</h2><div class="career-grid" id="placementPrepGrid"></div></div>
+<div class="career-section company-directory" id="companyDirectory"></div>
+<p class="career-note">These pathways and role examples are educational guidance for this ECIT website prototype. They are not verified vacancies, placement statistics, hiring guarantees, or official institutional placement services. Actual job requirements vary by employer and role.</p>
+</section>
+<script>
+(function(){
+var E=window.ECIT,root=document.getElementById('careerView');
+var $=function(s){return root.querySelector(s)};
+var LABEL={semi:'Semiconductor',comm:'Communication'},NAME={semi:'semiconductor',comm:'communication'};
+function li(a){return a.map(function(x){return '<li>'+x+'</li>'}).join('')}
+var esc=function(s){return String(s).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]})};
+
+/* ---- Career pathways and placement preparation ---- */
+function renderPathways(d){
+ var D={label:LABEL[d],name:NAME[d]};
+  var careerBundles=d==='comm' ? [
+   ['Wireless Systems Engineer','Wireless communication + DSP + link simulation',['Signals and systems','Probability and random processes','Digital communication','Wireless channels','MIMO and OFDM','MATLAB/Python link simulation','Mini-project: BER and link-budget study']],
+   ['RF and Antenna Engineer','Electromagnetics + RF circuits + antenna measurement',['Engineering electromagnetics','Transmission lines','RF and microwave fundamentals','Antenna theory','Impedance matching','Antenna simulation and measurement','Mini-project: antenna or RF link characterization']],
+   ['DSP and Signal Processing Engineer','DSP + estimation + implementation',['Signals and systems','Discrete-time signal processing','FIR and IIR filters','Random processes','Adaptive filtering','Detection and estimation','Mini-project: modulation or channel-estimation system']],
+   ['HF / Ionospheric Communications Research','Propagation + channel sounding + adaptive link design',['HF propagation','Ionosphere and TEC','MUF and frequency management','HF channel sounding','Link-quality estimation','Adaptive frequency selection','Mini-project: ionosphere-aware link analysis']],
+   ['5G/6G PHY Engineer','Digital communication + MIMO + cellular physical layer',['Digital modulation and coding','Wireless channel models','OFDM','MIMO and beamforming','5G NR physical layer','PHY simulation','Mini-project: link-level performance evaluation']],
+   ['Communication Software / SDR Engineer','DSP + software tools + practical radio systems',['Python or MATLAB fundamentals','DSP implementation','GNU Radio','SDR transmitter and receiver chains','Synchronization and channel estimation','Testing and debugging','Mini-project: SDR-based digital link']]
+  ] : [
+   ['RTL Design Engineer','Digital electronics + computer architecture + RTL design',['Digital electronics','Combinational and sequential logic','Computer architecture basics','Verilog HDL','FSM and datapath design','Synthesis and timing constraints','Project: UART, FIFO, or pipelined datapath']],
+   ['Design Verification Engineer','Digital design + SystemVerilog + verification methodology',['Digital electronics','Verilog HDL','SystemVerilog','Object-oriented programming basics','Assertions and functional coverage','UVM fundamentals','Project: verify an RTL block with a reusable testbench']],
+   ['Physical Design Engineer','Digital electronics + CMOS + RTL-to-GDS implementation',['Digital electronics','CMOS fundamentals','Static timing analysis basics','Logic synthesis','Floorplanning','Placement and clock-tree synthesis','Routing and timing closure','Project: analyze a small implementation flow']],
+   ['FPGA / Digital Hardware Engineer','Digital logic + RTL + FPGA implementation',['Digital electronics','Verilog HDL','FSMs and datapaths','Memory and interfaces','Simulation and debugging','FPGA synthesis and constraints','Project: implement and test a digital subsystem']],
+   ['Semiconductor Device / Process Engineer','Device physics + fabrication + characterization',['Semiconductor physics','PN junctions','MOSFET operation','CMOS process flow','Lithography and deposition overview','Device characterization','Project: device or process analysis']],
+   ['DFT and Test Engineer','Digital design + test concepts + fault analysis',['Digital electronics','Verilog and RTL structure','Digital testing fundamentals','Fault models','Scan and ATPG concepts','Test coverage and diagnosis','Project: testability analysis of a small design']]
+  ];
+  var prep=[
+   ['Technical interview preparation','Practice fundamentals and explain design decisions clearly.',['Revise core concepts for the selected pathway','Solve role-relevant problems','Prepare to discuss trade-offs and debugging steps']],
+   ['Project portfolio','Turn course bundles into demonstrable engineering work.',['Complete at least one end-to-end project','Document architecture, tools, results, and limitations','Publish code or reports where sharing is permitted']],
+   ['Application readiness','Prepare application material without assuming a placement outcome.',['Create a role-specific one-page resume','Maintain a project and skills inventory','Track applications and tailor each submission']]
+  ];
+  var bundleGrid=$('#careerBundleGrid'),prepGrid=$('#placementPrepGrid');
+  if(bundleGrid)bundleGrid.innerHTML=careerBundles.map(function(x){return '<article class="career-card"><span class="career-tag">Course bundle</span><h3>'+x[0]+'</h3><p>'+x[1]+'</p><ol>'+li(x[2])+'</ol></article>'}).join('');
+  if(prepGrid)prepGrid.innerHTML=prep.map(function(x){return '<article class="career-card"><h3>'+x[0]+'</h3><p>'+x[1]+'</p><ul>'+li(x[2])+'</ul></article>'}).join('');
+  var ch=$('#careerHeading'),ci=$('#careerIntro');if(ch)ch.textContent=D.label+' Careers and Placement';if(ci)ci.textContent='Explore role-based course bundles and preparation resources for '+D.name+' pathways. Select a pathway to see a suggested sequence of topics and projects.';
+}
+
+/* ---- Company directory: Edit COMPANIES to add or move companies (per domain) ---- */
+var COMPANIES={"semi":{"cats":["Chip designers","EDA tools","Analog, memory and foundry","Semiconductor equipment","Electronics and services"],"items":[["Chip designers","NVIDIA","GPUs, AI systems, networking, software","https://www.nvidia.com/en-us/about-nvidia/careers/"],["Chip designers","AMD","CPUs, GPUs, adaptive and embedded chips","https://careers.amd.com/"],["Chip designers","Intel","CPUs, graphics, foundry and process technology","https://jobs.intel.com/"],["Chip designers","Qualcomm","Mobile SoCs, wireless, edge AI","https://www.qualcomm.com/company/careers"],["Chip designers","Broadcom","Networking, broadband, custom silicon","https://www.broadcom.com/company/careers"],["Chip designers","MediaTek","Mobile, smart-device and connectivity SoCs","https://careers.mediatek.com/"],["Chip designers","Marvell","Data infrastructure, networking and custom silicon","https://www.marvell.com/company/careers.html"],["Chip designers","NXP Semiconductors","Automotive, industrial and secure connectivity chips","https://www.nxp.com/company/about-nxp/careers:CAREERS"],["Chip designers","Microchip Technology","Microcontrollers, analog and embedded solutions","https://www.microchip.com/en-us/about/careers"],["Chip designers","Renesas","Automotive, industrial and embedded semiconductors","https://www.renesas.com/en/about/careers"],["EDA tools","Synopsys","EDA tools and design IP","https://careers.synopsys.com/"],["EDA tools","Cadence","EDA tools, verification and design systems","https://www.cadence.com/en_US/home/company/careers.html"],["EDA tools","Siemens EDA","Verification, physical implementation and emulation","https://jobs.siemens.com/"],["EDA tools","Ansys","Engineering simulation and semiconductor tools","https://careers.ansys.com/"],["EDA tools","Keysight Technologies","Electronic design, test and measurement","https://jobs.keysight.com/"],["Analog, memory and foundry","Texas Instruments","Analog and embedded processing","https://careers.ti.com/"],["Analog, memory and foundry","Micron","DRAM and NAND memory","https://careers.micron.com/"],["Analog, memory and foundry","Samsung Semiconductor","Memory, foundry and system LSI","https://semiconductor.samsung.com/us/careers/"],["Analog, memory and foundry","TSMC","Foundry manufacturing and process technology","https://www.tsmc.com/english/careers"],["Analog, memory and foundry","GlobalFoundries","Semiconductor foundry and manufacturing","https://gf.com/careers/"],["Analog, memory and foundry","Analog Devices","Analog, mixed-signal and DSP ICs","https://careers.analog.com/"],["Analog, memory and foundry","Infineon","Power, automotive and security semiconductors","https://www.infineon.com/cms/en/careers/"],["Analog, memory and foundry","STMicroelectronics","MCUs, sensors, power and automotive chips","https://www.st.com/content/st_com/en/about/careers.html"],["Analog, memory and foundry","ON Semiconductor","Intelligent sensing and power technologies","https://www.onsemi.com/careers"],["Analog, memory and foundry","Skyworks Solutions","RF front-end and connectivity components","https://careers.skyworksinc.com/"],["Analog, memory and foundry","Qorvo","RF solutions and connectivity","https://www.qorvo.com/careers"],["Semiconductor equipment","Applied Materials","Semiconductor manufacturing equipment","https://www.appliedmaterials.com/us/en/careers.html"],["Semiconductor equipment","Lam Research","Wafer fabrication equipment","https://www.lamresearch.com/careers/"],["Semiconductor equipment","KLA","Process control and inspection systems","https://www.kla.com/careers"],["Semiconductor equipment","ASML","Lithography systems and semiconductor technology","https://www.asml.com/en/careers"],["Semiconductor equipment","Tokyo Electron","Semiconductor production equipment","https://www.tel.com/careers/"],["Electronics and services","Tata Electronics","Electronics manufacturing and semiconductor assembly","https://www.tataelectronics.com/careers"],["Electronics and services","Tata Elxsi","Embedded, automotive and product engineering","https://www.tataelxsi.com/careers"],["Electronics and services","HCLTech","Engineering R&D, embedded and semiconductor services","https://www.hcltech.com/careers"],["Electronics and services","Wipro","Engineering, embedded and technology services","https://careers.wipro.com/"],["Electronics and services","L&T Technology Services","Product engineering and embedded systems","https://www.ltts.com/careers"],["Electronics and services","Sasken","Embedded software and semiconductor engineering","https://www.sasken.com/careers/"]]},"comm":{"cats":["Wireless and RF chips","Networking and telecom","Test, radio and defence systems","Embedded and engineering services"],"items":[["Wireless and RF chips","Qualcomm","Mobile SoCs, wireless, edge AI","https://www.qualcomm.com/company/careers"],["Wireless and RF chips","Broadcom","Networking, broadband, custom silicon","https://www.broadcom.com/company/careers"],["Wireless and RF chips","MediaTek","Mobile, smart-device and connectivity SoCs","https://careers.mediatek.com/"],["Wireless and RF chips","Marvell","Data infrastructure, networking and custom silicon","https://www.marvell.com/company/careers.html"],["Wireless and RF chips","NXP Semiconductors","Automotive, industrial and secure connectivity chips","https://www.nxp.com/company/about-nxp/careers:CAREERS"],["Wireless and RF chips","Analog Devices","Analog, mixed-signal and DSP ICs","https://careers.analog.com/"],["Wireless and RF chips","Skyworks Solutions","RF front-end and connectivity components","https://careers.skyworksinc.com/"],["Wireless and RF chips","Qorvo","RF solutions and connectivity","https://www.qorvo.com/careers"],["Networking and telecom","Cisco","Networking, security and communications","https://jobs.cisco.com/"],["Networking and telecom","Ericsson","5G/6G networks, radio and telecom systems","https://www.ericsson.com/en/careers"],["Networking and telecom","Nokia","Telecom networks, optical and wireless systems","https://www.nokia.com/about-us/careers/"],["Networking and telecom","Samsung Networks","5G networks and telecom infrastructure","https://careers.samsung.com/"],["Networking and telecom","Juniper Networks","Routing, switching and network automation","https://careers.juniper.net/"],["Networking and telecom","Arista Networks","Cloud networking and data-center switches","https://www.arista.com/en/careers"],["Networking and telecom","Ciena","Optical networking and telecom systems","https://careers.ciena.com/"],["Networking and telecom","Tejas Networks","Telecom and optical networking products","https://www.tejasnetworks.com/careers/"],["Test, radio and defence systems","Keysight (Wireless)","Wireless test, RF and network emulation","https://jobs.keysight.com/"],["Test, radio and defence systems","Motorola Solutions","Mission-critical radio and communication systems","https://careers.motorolasolutions.com/"],["Test, radio and defence systems","Bharat Electronics Limited","Defence electronics, radar and communication systems","https://bel-india.in/careers/"],["Test, radio and defence systems","Astra Microwave Products","RF, microwave and defence electronics","https://www.astramwp.com/careers"],["Test, radio and defence systems","Centum Electronics","Electronic systems, RF and aerospace electronics","https://www.centumelectronics.com/careers/"],["Embedded and engineering services","Tata Elxsi","Embedded, automotive and product engineering","https://www.tataelxsi.com/careers"],["Embedded and engineering services","HCLTech","Engineering R&D, embedded and semiconductor services","https://www.hcltech.com/careers"],["Embedded and engineering services","Wipro","Engineering, embedded and technology services","https://careers.wipro.com/"],["Embedded and engineering services","L&T Technology Services","Product engineering and embedded systems","https://www.ltts.com/careers"],["Embedded and engineering services","Sasken","Embedded software and semiconductor engineering","https://www.sasken.com/careers/"]]}};
+var mount=$('#companyDirectory');
+mount.innerHTML=
+ '<div class="eyebrow">COMPANY DIRECTORY</div><h2 id="companyHeading"></h2><p class="intro" id="companyIntro"></p>'+
+ '<div class="toolbar"><div class="filters" id="companyFilters"></div>'+
+ '<input class="search" id="companySearch" type="search" placeholder="Search companies or technologies..." aria-label="Search companies"></div>'+
+ '<div class="grid" id="companyGrid"></div><p class="empty" id="companyEmpty">No matching companies found.</p>'+
+ '<p class="career-note">Links open each company\u2019s careers page. Listings are a discovery directory, not a statement of current vacancies or hiring status. Some employers may route applicants to regional job portals.</p>';
+var grid=$('#companyGrid'),filters=$('#companyFilters'),search=$('#companySearch'),empty=$('#companyEmpty');
+var domain=E.domain,filter='all';
+function drawFilters(){filters.innerHTML=['all'].concat(COMPANIES[domain].cats).map(function(x,i){return '<button type="button" data-filter="'+esc(x)+'" class="'+(i===0?'active':'')+'">'+(x==='all'?'All companies':esc(x))+'</button>'}).join('')}
+function renderCompanies(){
+ var D=COMPANIES[domain],q=search.value.trim().toLowerCase();
+ var rows=D.items.filter(function(x){return (filter==='all'||x[0]===filter)&&(!q||(x[0]+' '+x[1]+' '+x[2]).toLowerCase().indexOf(q)>-1)});
+ grid.innerHTML=rows.map(function(x){return '<article class="card"><span class="tag">'+esc(x[0])+'</span><h2>'+esc(x[1])+'</h2><p>'+esc(x[2])+'</p><a href="'+esc(x[3])+'" target="_blank" rel="noopener noreferrer">Company careers \u2197</a></article>'}).join('');
+ empty.style.display=rows.length?'none':'block';
+ $('#companyHeading').textContent=LABEL[domain]+' companies: choose where you want to aim.';
+ $('#companyIntro').textContent='Explore career pages of '+D.items.length+' '+NAME[domain]+' employers across '+D.cats.length+' categories.';
+}
+filters.addEventListener('click',function(e){var b=e.target.closest('button');if(!b)return;filter=b.dataset.filter;[].forEach.call(filters.querySelectorAll('button'),function(x){x.classList.toggle('active',x===b)});renderCompanies()});
+search.addEventListener('input',renderCompanies);
+E.onDomain(function(d){domain=d;filter='all';search.value='';renderPathways(d);drawFilters();renderCompanies()});
+})();
+</script>
+</body>
+</html>

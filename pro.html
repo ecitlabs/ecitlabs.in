@@ -1,0 +1,260 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Pro | ECIT</title>
+<script>
+/* ECIT section shim: lets this file run inside the ECIT site frame (index.html) with the shared header.
+   Opened on its own, it sends the visitor to the full site. */
+(function(){
+ if(window.parent===window){location.replace('index.html#pro');return}
+ var q=/[?&]d=(semi|comm)/.exec(location.search),de=document.documentElement;
+ var E=window.ECIT={domain:q?q[1]:'semi',_l:[],onDomain:function(fn){this._l.push(fn);try{fn(this.domain)}catch(err){console.error(err)}}};
+ de.setAttribute('data-domain',E.domain);
+ function post(m){try{parent.postMessage(m,'*')}catch(err){}}
+ window.addEventListener('message',function(e){var m=e.data;if(!m||m.ecit!=='domain'||(m.domain!=='semi'&&m.domain!=='comm')||m.domain===E.domain)return;
+  E.domain=m.domain;de.setAttribute('data-domain',m.domain);E._l.forEach(function(fn){try{fn(m.domain)}catch(err){console.error(err)}})});
+ var last=0;
+ function size(){var h=Math.ceil(document.body.getBoundingClientRect().height);if(h&&h!==last){last=h;post({ecit:'height',h:h})}}
+ window.addEventListener('load',function(){size();post({ecit:'ready'})});
+ window.addEventListener('resize',size);
+ document.addEventListener('DOMContentLoaded',function(){
+  if(window.ResizeObserver)new ResizeObserver(size).observe(document.body);else setInterval(size,400);
+  size();
+ });
+ document.addEventListener('pointerdown',function(){post({ecit:'tap'})},true);
+ document.addEventListener('click',function(e){var a=e.target.closest&&e.target.closest('a[href^="#"]');if(!a)return;e.preventDefault();post({ecit:'link',href:a.getAttribute('href')})});
+})();
+</script>
+<style>
+/* Page basics shared with the ECIT shell, so this section looks the same inside the site frame. */
+:root{--ink:#171A1E;--red:#A90025;--white:#fff;--soft:#F3F4F5;--gray:#777;--serif:Georgia,"Times New Roman",serif;--sans:"Helvetica Neue",Arial,sans-serif;--s1:8px;--s2:16px;--s3:24px;--s4:48px;--s5:96px;--max:1240px}
+*{box-sizing:border-box;margin:0}
+html{-webkit-text-size-adjust:100%}
+body{overflow-wrap:break-word;font-family:var(--sans);color:var(--ink);line-height:1.6;background:var(--white)}
+img{display:block;width:100%;height:100%;object-fit:cover;background:#2a2f36}
+a{color:inherit;text-decoration:none}
+:focus-visible{outline:3px solid var(--red);outline-offset:2px}
+.wrap{max-width:var(--max);margin:0 auto;padding:0 var(--s3)}
+h1,h2,h3{font-family:var(--serif);font-weight:400;line-height:1.15}
+h2{font-size:clamp(2rem,4vw,3rem);margin-bottom:var(--s3)}
+.lead{max-width:62ch;color:#454a52;font-size:1.1rem}
+.btn{display:inline-block;padding:14px 26px;font-weight:600;border:2px solid var(--red);background:var(--red);color:#fff;cursor:pointer;font:inherit;font-weight:600;transition:background .2s,color .2s}
+.btn:hover{background:#fff;color:var(--red)}
+.more{color:var(--red);font-weight:600;border-bottom:2px solid transparent}
+.more:hover{border-color:var(--red)}
+/* Same desktop density as the ECIT shell (15px root on wide screens), so text sizes match the original site. */
+@media(min-width:1101px){
+ html{font-size:15px}
+ :root{--s5:64px;--max:1400px}
+ .lead{font-size:1rem}
+ h2{font-size:clamp(1.8rem,2.6vw,2.5rem);margin-bottom:var(--s2)}
+ .btn{padding:12px 22px}
+}
+/* The site frame sizes itself to this content, so sections must not fill the viewport. */
+section[class$="-view"]{display:block!important;min-height:0!important}
+</style>
+<style>
+/* ===== ECIT PRO: aligned with the main site's charcoal / white / ECIT red theme ===== */
+@property --ecit-ring-angle { syntax: "<angle>"; inherits: false; initial-value: 0deg; }
+.pro-view{background:#fff;color:var(--ink)}
+.pro-view .pro-hero{background:linear-gradient(115deg,#171A1E 0%,#25292f 72%,#3a101a 100%);border-radius:0;box-shadow:none;border-left:5px solid var(--red)}
+.pro-view .eyebrow{color:var(--red)}
+.pro-view .pro-hero .eyebrow{color:#ffb2bf!important}
+.pro-view .accent{color:var(--red)}
+.pro-view .pro-hero .accent{color:#ff526f}
+.pro-view .pro-panel{background:#fff;color:var(--ink);border:1px solid #d9dbdd;border-top:4px solid var(--red);border-radius:2px;box-shadow:0 12px 32px #171a1e12;animation:proPanelGlow 4s ease-in-out infinite}
+.pro-view .pro-panel>div:first-child{color:#555b63!important}
+.pro-view .pro-panel>div:first-child b{color:var(--red)!important}
+.pro-view .pro-circle{position:relative;isolation:isolate;display:grid;place-items:center;width:145px;height:145px;margin:20px auto;border:0!important;border-radius:50%;background:transparent!important;color:var(--ink);padding:0}
+.pro-view .pro-circle::before{content:"";position:absolute;inset:0;border-radius:50%;padding:8px;background:conic-gradient(from -90deg,var(--red) 0deg var(--ecit-ring-angle),transparent var(--ecit-ring-angle));-webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude;animation:ecitRingCycle 4s linear infinite;z-index:0}
+.pro-view .pro-circle::after{content:"";position:absolute;inset:10px;border-radius:50%;background:#171A1E;z-index:-1}
+.pro-view .pro-wordmark{position:relative;z-index:1;font:900 29px/1 var(--sans);letter-spacing:.19em;padding-left:.19em;color:#fff;text-shadow:0 0 12px #a9002555}
+@keyframes ecitRingCycle{
+  0%{--ecit-ring-angle:0deg;opacity:0}
+  5%{opacity:1}
+  48%{--ecit-ring-angle:360deg;opacity:1}
+  70%{--ecit-ring-angle:360deg;opacity:1}
+  86%,100%{--ecit-ring-angle:0deg;opacity:0}
+}
+.pro-view .pro-compare{border:1px solid #d9dbdd;border-radius:2px;box-shadow:none}
+.pro-view .pro-plan{border-radius:2px;border-color:#d9dbdd;background:#fff;color:var(--ink)}
+.pro-view .pro-plan.premium{background:#fff;color:var(--ink);border:2px solid var(--red)}
+.pro-view .pro-plan.premium p{color:#4a4f56}
+.pro-view .pro-switch{background:#f3f4f5;border:1px solid #d9dbdd;border-radius:999px}
+.pro-view .pro-switch:before{background:var(--ink);border-radius:999px;transition:transform .55s cubic-bezier(.22,1,.36,1),background-color .3s ease}
+.pro-view .pro-switch:has(button[data-proplan="pro"].active):before{background:var(--red)}
+.pro-view .pro-switch button{border-radius:999px}
+.pro-view .pro-cta{background:var(--ink);border-radius:0;border-left:5px solid var(--red);box-shadow:none}
+.pro-view .pro-hero,.pro-view .pro-cta{position:relative;overflow:hidden;isolation:isolate}
+.pro-view .pro-hero:after,.pro-view .pro-cta:after{content:"";position:absolute;inset:-45% -70%;z-index:-1;pointer-events:none;background:linear-gradient(105deg,transparent 42%,#a9002518 49%,#a9002538 51%,transparent 58%);transform:translateX(-45%);animation:proBannerSweep 6s ease-in-out infinite}
+@keyframes proBannerSweep{0%,18%{transform:translateX(-45%)}72%,100%{transform:translateX(45%)}}
+@keyframes proPanelGlow{0%,100%{box-shadow:0 8px 24px #171a1e0b}50%{box-shadow:0 12px 30px #a900251c}}
+@media(prefers-reduced-motion:reduce){
+ .pro-view .pro-circle::before,.pro-view .pro-panel,.pro-view .pro-hero:after,.pro-view .pro-cta:after{animation:none!important}
+ .pro-view .pro-circle::before{background:conic-gradient(var(--red) 0deg 360deg,transparent 360deg);opacity:1}
+ .pro-view .pro-switch:before,.pro-view .pro-plan{transition:none!important}
+}
+
+
+/* Embedded Pro view: shares the existing ECIT shell and header. */
+.pro-view{min-height:calc(100vh - 80px);padding:52px max(24px,calc((100% - 1240px)/2)) 76px;background:#f5f5f3;color:#171717}
+.pro-view .pro-hero{display:grid;grid-template-columns:1.5fr .8fr;gap:35px;align-items:center;padding:48px;border-radius:25px;background:radial-gradient(ellipse at 88% 25%,#42090d,transparent 38%),linear-gradient(115deg,#090506,#260406);color:#fff;box-shadow:0 20px 48px #0002}
+.pro-view .eyebrow{font-size:11px;letter-spacing:.15em;font-weight:800;color:#c40020;text-transform:uppercase}
+.pro-view h1{font-size:clamp(42px,6vw,76px);line-height:1;letter-spacing:-.05em;margin:18px 0}
+.pro-view .accent{color:#ff3542}.pro-view p{color:#555;line-height:1.7}.pro-view .pro-hero p{color:#d7c9ca;max-width:650px;font-size:16px}
+.pro-view .pro-panel{border:1px solid #53383b;background:#110b0c;border-radius:20px;padding:24px;text-align:center}.pro-view .pro-circle{width:145px;height:145px;border:9px solid #f32c39;border-radius:50%;display:grid;place-items:center;margin:20px auto;font-size:27px;font-weight:800}.pro-view .pro-section{padding-top:65px}.pro-view .pro-head{display:grid;grid-template-columns:1.2fr 1fr;gap:25px;align-items:end;margin-bottom:22px}.pro-view .pro-head h2{font-size:clamp(32px,4.5vw,52px);line-height:1.05;letter-spacing:-.04em;margin:8px 0}.pro-view .pro-grid{display:grid;grid-template-columns:repeat(3,1fr);border:1px solid #ddd;background:#fff}.pro-view .pro-benefit{padding:23px;border-right:1px solid #ddd;border-bottom:1px solid #ddd;min-height:145px}.pro-view .pro-benefit:nth-child(3n){border-right:0}.pro-view .pro-benefit h3{font-size:14px;margin:0 0 10px}.pro-view .pro-benefit p{font-size:13px;margin:0}.pro-view .pro-compare{background:#fff;border:1px solid #ddd;border-radius:20px;padding:22px}.pro-view .pro-plans{display:grid;grid-template-columns:1fr 1fr;gap:16px}.pro-view .pro-plan{padding:24px;border:1px solid #ddd;border-radius:16px}.pro-view .pro-plan.premium{background:#190305;color:white;border:2px solid #e32635}.pro-view .pro-plan p,.pro-view .pro-plan li{font-size:13px}.pro-view .pro-plan.premium p{color:#e2d5d6}.pro-view .pro-plan ul{padding-left:18px;line-height:2}.pro-view .pro-switch{--switch-x:0%;position:relative;display:flex;justify-content:center;gap:0;margin:0 auto 22px;background:#eee;border:1px solid #ddd;border-radius:30px;padding:4px;width:230px;isolation:isolate}.pro-view .pro-switch:before{content:"";position:absolute;z-index:-1;left:4px;top:4px;bottom:4px;width:calc(50% - 2px);border-radius:25px;background:#171717;transform:translateX(var(--switch-x));transition:transform .32s cubic-bezier(.2,.8,.2,1),background .25s;box-shadow:0 3px 10px #0002}.pro-view .pro-switch:has(button[data-proplan="pro"].active):before{--switch-x:100%;background:#d60000}.pro-view .pro-switch button{position:relative;flex:1;min-width:0;border:0;background:transparent;color:#555;border-radius:25px;padding:9px 12px;font-weight:800;cursor:pointer;transition:color .2s,transform .25s}.pro-view .pro-switch button.active{color:#fff;transform:scale(1.035)}.pro-view .pro-plan{transition:transform .28s ease,box-shadow .28s ease,opacity .28s ease}.pro-view .pro-plan.is-selected{transform:scale(1.018);box-shadow:0 12px 28px #00000012;position:relative;z-index:1}.pro-view .pro-plan.premium.is-selected{box-shadow:0 12px 30px #d6000020}.pro-view .pro-cta{margin-top:60px;padding:36px;border-radius:22px;background:linear-gradient(110deg,#090506,#270406);color:#fff} .pro-view .pro-cta p{color:#d8c8ca}
+/* Subtle animated emphasis for Pro banners; avoids harsh rapid flashing. */
+.pro-view .pro-hero,.pro-view .pro-cta{position:relative;overflow:hidden;isolation:isolate}
+.pro-view .pro-hero:after,.pro-view .pro-cta:after{content:"";position:absolute;inset:-45% -70%;z-index:-1;pointer-events:none;background:linear-gradient(105deg,transparent 42%,#ff34451c 49%,#ff34453d 51%,transparent 58%);transform:translateX(-45%);animation:proBannerSweep 6s ease-in-out infinite}
+.pro-view .pro-panel{animation:proPanelGlow 3.8s ease-in-out infinite}
+@keyframes proBannerSweep{0%,18%{transform:translateX(-45%)}72%,100%{transform:translateX(45%)}}
+@keyframes proPanelGlow{0%,100%{box-shadow:0 0 0 #ff263500}50%{box-shadow:0 0 24px #ff26352b}}
+@media(prefers-reduced-motion:reduce){.pro-view .pro-hero:after,.pro-view .pro-cta:after,.pro-view .pro-panel{animation:none}}
+
+@media(max-width:800px){.pro-view .pro-hero,.pro-view .pro-head{grid-template-columns:1fr}.pro-view .pro-grid{grid-template-columns:repeat(2,1fr)}.pro-view .pro-benefit:nth-child(3n){border-right:1px solid #ddd}.pro-view .pro-benefit:nth-child(2n){border-right:0}}
+@media(max-width:580px){.pro-view{padding:35px 16px 55px}.pro-view .pro-hero{padding:28px 22px}.pro-view .pro-grid,.pro-view .pro-plans{grid-template-columns:1fr}.pro-view .pro-benefit{border-right:0!important}.pro-view .pro-benefit:last-child{border-bottom:0}}
+
+/* Pro comparison: match the supplied reference and soften plan switching */
+.pro-view .pro-compare{background:#fff;border:1px solid #dededb;border-radius:22px;padding:28px 30px 30px;box-shadow:none}
+.pro-view .pro-switch{width:280px;margin:0 auto 26px;padding:4px;background:#efefed;border:1px solid #dededb;border-radius:999px}
+.pro-view .pro-switch:before{left:4px;top:4px;bottom:4px;width:calc(50% - 2px);border-radius:999px;transform:translateX(var(--switch-x));background:#dededb;transition:transform .55s cubic-bezier(.22,1,.36,1),background-color .4s ease,box-shadow .4s ease}
+.pro-view .pro-switch:has(button[data-proplan="pro"].active):before{--switch-x:100%;background:linear-gradient(110deg,#d40000,#f52e43);box-shadow:0 5px 14px #0002}
+.pro-view .pro-switch button{padding:10px 14px;color:#6c6c6c;letter-spacing:.1em;transition:color .35s ease,filter .45s ease,transform .45s cubic-bezier(.22,1,.36,1)}
+.pro-view .pro-switch button.active{color:#fff}
+.pro-view .pro-plans{grid-template-columns:1fr 1fr;gap:22px;align-items:stretch}
+.pro-view .pro-plan{min-width:0;padding:28px;border:1px solid #e7e7e5;border-radius:19px;background:#fff;color:#171717;transform:translateZ(0);transition:opacity .6s ease,filter .6s ease,transform .6s cubic-bezier(.22,1,.36,1),box-shadow .6s ease,border-color .4s ease}
+.pro-view .pro-plan h3{font-size:27px;line-height:1.2;margin:18px 0 8px}
+.pro-view .pro-plan p,.pro-view .pro-plan li{font-size:14px;line-height:1.65}
+.pro-view .pro-plan ul{padding-left:20px;margin-top:22px}
+.pro-view .pro-plan.premium{background:#210000;color:#fff;border:2px solid #ff3347;box-shadow:0 18px 42px #df001f20}
+.pro-view .pro-plan.premium p{color:#f0dfe0}
+.pro-view .pro-plan.is-selected{opacity:1!important;filter:none!important;transform:translateY(-2px);box-shadow:0 14px 32px #00000012;z-index:1}
+.pro-view .pro-plan.premium.is-selected{box-shadow:0 18px 42px #df001f25}
+.pro-view .pro-plan:not(.is-selected){opacity:.48!important;filter:blur(1.35px) saturate(.72);transform:scale(.985);box-shadow:none}
+@media(max-width:700px){.pro-view .pro-compare{padding:22px 16px}.pro-view .pro-plans{grid-template-columns:1fr}.pro-view .pro-plan:not(.is-selected){transform:none}}
+@media(prefers-reduced-motion:reduce){.pro-view .pro-switch:before,.pro-view .pro-switch button,.pro-view .pro-plan{transition:none!important}}
+
+
+
+/* Keep state changes class-driven so all visual properties can interpolate together. */
+.pro-view .pro-compare{overflow:hidden}
+.pro-view .pro-switch:before{transition:transform .72s cubic-bezier(.16,1,.3,1),background .5s ease,box-shadow .5s ease}
+.pro-view .pro-switch button{transition:color .45s ease,transform .65s cubic-bezier(.16,1,.3,1),filter .45s ease}
+.pro-view .pro-plan{will-change:transform,opacity,filter;transition:opacity .85s cubic-bezier(.22,1,.36,1),filter .85s cubic-bezier(.22,1,.36,1),transform .85s cubic-bezier(.22,1,.36,1),box-shadow .7s ease,border-color .5s ease}
+.pro-view .pro-plan.is-selected{opacity:1!important;filter:blur(0) saturate(1)!important;transform:translate3d(0,-3px,0) scale(1)!important}
+.pro-view .pro-plan:not(.is-selected){opacity:.34!important;filter:blur(2.8px) saturate(.65)!important;transform:translate3d(0,3px,0) scale(.985)!important;pointer-events:none}
+.pro-view .pro-choose{display:inline-flex;align-items:center;justify-content:center;gap:10px;margin-top:18px;min-width:190px;padding:13px 22px;border-radius:999px;background:#ef6500;color:#260800;text-decoration:none;font-weight:800;transition:transform .35s cubic-bezier(.2,.8,.2,1),background .3s ease,box-shadow .35s ease}
+.pro-view .pro-choose:hover{background:#ff7a12;transform:translateY(-2px);box-shadow:0 9px 22px #ef650044}
+.pro-view .pro-choose:active{transform:translateY(0) scale(.98)}
+.pro-view .pro-choose span{transition:transform .3s ease}
+.pro-view .pro-choose:hover span{transform:translateX(4px)}
+@media(max-width:700px){.pro-view .pro-plan:not(.is-selected){transform:none!important}}
+@media(prefers-reduced-motion:reduce){.pro-view .pro-switch:before,.pro-view .pro-switch button,.pro-view .pro-plan,.pro-view .pro-choose,.pro-view .pro-choose span{transition:none!important}}
+
+
+
+.pro-view .pro-price-line{display:flex;align-items:baseline;gap:10px;margin:28px 0 22px;color:#fff}.pro-view .pro-price-line strong{font-size:38px;line-height:1;font-weight:850;letter-spacing:-.04em}.pro-view .pro-price-line span{font-size:15px;color:#e2d5d6}.pro-view .pro-price-line small{font-size:13px;color:#aa9a9c;margin-left:6px}.pro-view .pro-hero-actions{display:flex;gap:10px;flex-wrap:wrap}.pro-view .pro-btn,.pro-view .pro-card-btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;text-decoration:none;font-weight:750;transition:transform .25s ease,background .25s ease,color .25s ease,border-color .25s ease,box-shadow .25s ease}.pro-view .pro-btn{padding:12px 19px;border-radius:999px;font-size:13px}.pro-view .pro-btn:hover,.pro-view .pro-card-btn:hover{transform:translateY(-2px)}.pro-view .pro-btn-primary{background:#fff;color:#a90018}.pro-view .pro-btn-primary:hover{background:#ffecef;box-shadow:0 8px 22px #0003}.pro-view .pro-btn-outline{border:1px solid #655457;color:#fff;background:transparent}.pro-view .pro-btn-outline:hover{border-color:#ff526f;background:#ffffff0d}.pro-view .pro-perks{font-size:12px;color:#d8c8ca;margin-top:20px}.pro-view .pro-plan{display:flex;flex-direction:column;min-height:100%;transition:opacity .45s ease,filter .45s ease,transform .55s cubic-bezier(.22,1,.36,1),box-shadow .45s ease}.pro-view .plan-topline{display:flex;justify-content:space-between;align-items:center;font-size:11px;letter-spacing:.1em;font-weight:850;margin-bottom:24px}.pro-view .pro-plan:not(.premium) .plan-topline{color:#92969b}.pro-view .pro-plan.premium .plan-topline{color:#ff6974}.pro-view .compare-price{display:flex;align-items:baseline;gap:7px;margin:14px 0 2px}.pro-view .compare-price strong{font-size:30px;letter-spacing:-.04em}.pro-view .compare-price span{font-size:12px;opacity:.72}.pro-view .pro-plan ul{flex:1;margin-bottom:22px}.pro-view .pro-card-btn{width:100%;min-height:42px;border-radius:999px;font-size:12px;margin-top:14px}.pro-view .pro-card-btn-light{background:#f0f1f2;color:#292d32;border:1px solid #e1e2e4}.pro-view .pro-card-btn-light:hover{background:#e6e8ea}.pro-view .pro-card-btn-pro{background:#f06400;color:#391500}.pro-view .pro-card-btn-pro:hover{background:#ff7a12;box-shadow:0 6px 18px #f0640030}.pro-view .pro-plan.is-selected{transform:translateY(-2px) scale(1.012)}
+@media(max-width:760px){.pro-view .pro-price-line{margin:22px 0 18px}.pro-view .pro-perks{line-height:2}.pro-view .pro-hero-actions{gap:8px}.pro-view .pro-btn{padding:11px 15px}}
+@media(prefers-reduced-motion:reduce){.pro-view .pro-btn,.pro-view .pro-card-btn,.pro-view .pro-plan{transition:none!important}}
+/* Free and Pro comparison actions: distinct brand colors */
+.pro-view .pro-card-btn-light{background:#171717!important;color:#fff!important;border:1px solid #171717!important;box-shadow:0 4px 12px #00000018}
+.pro-view .pro-card-btn-light:hover{background:#303030!important;border-color:#303030!important;color:#fff!important}
+.pro-view .pro-card-btn-pro{background:#df1024!important;color:#fff!important;border:1px solid #df1024!important;box-shadow:0 4px 14px #df10242b}
+.pro-view .pro-card-btn-pro:hover{background:#f3263b!important;border-color:#f3263b!important;color:#fff!important;box-shadow:0 7px 20px #df102440}
+/* Selected Free/Pro switch states and clickable comparison cards */
+.pro-view .pro-switch:has(button[data-proplan="free"].active):before{--switch-x:0%;background:#171717!important}
+.pro-view .pro-switch:has(button[data-proplan="pro"].active):before{--switch-x:100%;background:#df1024!important}
+.pro-view .pro-switch button.active{color:#fff!important}
+.pro-view .pro-plan{cursor:pointer}
+.pro-view .pro-plan:not(.is-selected){pointer-events:auto!important}
+/* Inactive blurred plan buttons are visually and functionally disabled. */
+.pro-view .pro-plan:not(.is-selected) .pro-card-btn{pointer-events:none!important;cursor:not-allowed;opacity:.45;filter:grayscale(.65)}
+.pro-view .pro-plan:focus-visible{outline:2px solid #df1024;outline-offset:3px}
+
+
+
+
+.pro-view .pro-hero{grid-template-columns:minmax(0,1.7fr) minmax(300px,.9fr);align-items:center;gap:clamp(28px,5vw,76px);padding:clamp(30px,4.5vw,58px)}
+.pro-view .pro-dashboard{width:100%;max-width:390px;justify-self:end;box-sizing:border-box;padding:24px 22px 22px;background:linear-gradient(145deg,#17090b 0%,#100809 65%,#210407 100%);border:1px solid #503034;border-radius:22px;color:#fff;box-shadow:0 18px 55px #0005,inset 0 1px #ffffff0b;animation:proDashFloat 6s ease-in-out infinite;position:relative;overflow:hidden}
+.pro-view .pro-dashboard:before{content:"";position:absolute;inset:-50%;pointer-events:none;background:radial-gradient(circle at 50% 38%,#e21b3030,transparent 35%);animation:proDashAura 5s ease-in-out infinite}
+.pro-view .pro-dash-top{position:relative;display:flex;align-items:center;justify-content:space-between;font-size:11px;letter-spacing:.1em;color:#a99a9d;margin-bottom:26px}
+.pro-view .pro-dash-top b{font-size:11px;letter-spacing:.06em;color:#79e5a0;display:flex;align-items:center;gap:7px}.pro-view .pro-dash-top i{width:7px;height:7px;border-radius:50%;background:#79e5a0;box-shadow:0 0 10px #79e5a0;animation:proActivePulse 1.8s ease-in-out infinite}
+.pro-view .pro-dashboard .pro-circle{width:150px;height:150px;margin:0 auto 20px;display:flex;flex-direction:column;gap:8px;justify-content:center;align-items:center;border:0!important;position:relative;isolation:isolate;border-radius:50%;background:transparent!important}
+.pro-view .pro-dashboard .pro-circle:before{inset:0;padding:9px;background:conic-gradient(from -90deg,#ff2637 0deg,#ff2637 78%,#8d101d 83%,#ff2637 100%);mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);mask-composite:exclude;-webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;animation:proRingSpin 7s linear infinite,proRingGlow 2.4s ease-in-out infinite;filter:drop-shadow(0 0 7px #ff263766)}
+.pro-view .pro-dashboard .pro-circle:after{inset:10px;background:radial-gradient(circle at 50% 35%,#191416,#090809 76%);box-shadow:inset 0 0 22px #ff203015,0 0 0 1px #ffffff0b;z-index:0}
+.pro-view .pro-dashboard .pro-wordmark{font-size:29px;letter-spacing:.12em;padding-left:.12em;text-shadow:0 0 16px #ff263766;animation:proWordPulse 3s ease-in-out infinite}
+.pro-view .pro-dashboard .pro-circle small{z-index:1;position:relative;font-size:9px;letter-spacing:.24em;color:#b8a8ab}
+.pro-view .pro-orbit{position:absolute;inset:-8px;border:1px solid #ff27351a;border-radius:50%;animation:proOrbitPulse 3.2s ease-in-out infinite}
+.pro-view .pro-stats{position:relative;display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:0 0 17px}
+.pro-view .pro-stats>div{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:7px;min-height:70px;border:1px solid #ffffff16;border-radius:12px;background:#ffffff03;transition:transform .3s ease,border-color .3s ease,background .3s ease}.pro-view .pro-stats>div:hover{transform:translateY(-3px);border-color:#ff334455;background:#ff26370a}
+.pro-view .pro-stats strong{font-size:17px;line-height:1;color:#fff;font-weight:800}.pro-view .pro-stats span{font-size:10px;color:#9f9295}
+.pro-view .pro-meter-list{position:relative;display:grid;gap:13px}.pro-view .pro-meter-list>div{display:grid;grid-template-columns:68px minmax(30px,1fr) auto;align-items:center;gap:10px;font-size:10px;color:#a99da0}.pro-view .pro-meter-list i{height:4px;border-radius:9px;background:#3a2023;overflow:hidden}.pro-view .pro-meter-list i b{height:100%;display:block;border-radius:9px;background:linear-gradient(90deg,#d90019,#ff3442);box-shadow:0 0 9px #ff263766;transform-origin:left;animation:proBarReveal 1.5s cubic-bezier(.2,.8,.2,1) both}.pro-view .pro-meter-list>div:nth-child(2) b{animation-delay:.15s}.pro-view .pro-meter-list>div:nth-child(3) b{animation-delay:.3s}.pro-view .pro-meter-list strong{font-size:9px;color:#ff9ba3;white-space:nowrap}
+@keyframes proRingSpin{to{transform:rotate(360deg)}}@keyframes proRingGlow{0%,100%{filter:drop-shadow(0 0 5px #ff263744)}50%{filter:drop-shadow(0 0 13px #ff2637aa)}}@keyframes proWordPulse{0%,100%{text-shadow:0 0 8px #ff263733}50%{text-shadow:0 0 20px #ff263799}}@keyframes proOrbitPulse{0%,100%{transform:scale(.98);opacity:.35}50%{transform:scale(1.04);opacity:1}}@keyframes proActivePulse{0%,100%{opacity:1;box-shadow:0 0 10px #79e5a0}50%{opacity:.45;box-shadow:0 0 2px #79e5a0}}@keyframes proDashFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-5px)}}@keyframes proDashAura{0%,100%{opacity:.4;transform:scale(.9)}50%{opacity:1;transform:scale(1.08)}}@keyframes proBarReveal{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+@media(max-width:760px){.pro-view .pro-hero{grid-template-columns:1fr}.pro-view .pro-dashboard{justify-self:center;max-width:390px}.pro-view .pro-dashboard .pro-circle{width:136px;height:136px}}
+@media(prefers-reduced-motion:reduce){.pro-view .pro-dashboard,.pro-view .pro-dashboard:before,.pro-view .pro-dashboard *,.pro-view .pro-dashboard .pro-circle:before{animation:none!important;transition:none!important}}
+
+
+
+/* Compact the full Pro hero while preserving its two-column composition. */
+.pro-view .pro-hero{padding:clamp(24px,3.2vw,40px)!important;gap:clamp(22px,3.5vw,52px)!important;min-height:0!important}
+.pro-view .pro-hero h1{font-size:clamp(44px,6vw,78px)!important;line-height:.98!important;letter-spacing:-.055em!important;margin:16px 0 18px!important}
+.pro-view .pro-hero p{font-size:15px!important;line-height:1.6!important}
+.pro-view .pro-price-line{margin:20px 0 18px!important}
+.pro-view .pro-dashboard{padding:19px 19px 18px!important;max-width:370px!important}
+.pro-view .pro-dash-top{margin-bottom:19px!important}
+.pro-view .pro-dashboard .pro-circle{width:142px!important;height:142px!important;margin-bottom:16px!important}
+.pro-view .pro-stats{margin-bottom:14px!important}
+.pro-view .pro-stats>div{min-height:64px!important}
+
+/* Animated technical artwork sits behind content and changes with the domain switch. */
+.pro-view .pro-hero{isolation:isolate;position:relative;overflow:hidden}
+.pro-view .pro-hero:before{content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;opacity:.42;transition:opacity .7s ease,background-position 1.2s ease;background-repeat:no-repeat}
+html[data-domain="semi"] .pro-view .pro-hero:before{opacity:.46;background-image:
+ radial-gradient(circle at 78% 22%,#ff344522 0 2px,transparent 3px),
+ radial-gradient(circle at 90% 72%,#ff344533 0 2px,transparent 3px),
+ repeating-linear-gradient(90deg,transparent 0 46px,#ff334414 47px 48px,transparent 49px 96px),
+ repeating-linear-gradient(0deg,transparent 0 38px,#ff334410 39px 40px,transparent 41px 80px);background-size:190px 150px,240px 190px,100% 100%,100% 100%;background-position:70% 0,100% 100%,0 0,0 0;animation:semiCircuitDrift 18s linear infinite}
+html[data-domain="comm"] .pro-view .pro-hero:before{opacity:.52;background-image:
+ radial-gradient(ellipse at 82% 50%,transparent 0 52px,#ff39452b 53px 54px,transparent 55px 82px,#ff394522 83px 84px,transparent 85px 112px,#ff39451a 113px 114px,transparent 115px),
+ radial-gradient(circle at 82% 50%,#ff394544 0 3px,transparent 4px),
+ linear-gradient(125deg,transparent 0 74%,#ff39451a 74.2% 74.5%,transparent 74.7%);background-size:100% 100%;animation:commWavePulse 5s ease-in-out infinite}
+.pro-view .pro-hero>*{position:relative;z-index:1}
+.pro-view .pro-dashboard .pro-circle{filter:drop-shadow(0 0 12px #ff273533)}
+.pro-view .pro-dashboard .pro-circle:before{animation:proRingSpin 5.5s linear infinite,proRingGlow 2s ease-in-out infinite,proRingBreath 3.4s ease-in-out infinite!important}
+.pro-view .pro-dashboard .pro-circle:after{box-shadow:inset 0 0 26px #ff203022,0 0 18px #ff26371a!important}
+.pro-view .pro-dashboard .pro-orbit{inset:-13px!important;border:1px solid #ff27352b!important;box-shadow:0 0 16px #ff273512;animation:proOrbitPulse 2.8s ease-in-out infinite!important}
+@keyframes semiCircuitDrift{0%{background-position:70% 0,100% 100%,0 0,0 0}50%{background-position:74% 8%,96% 94%,18px 0,0 14px}100%{background-position:70% 0,100% 100%,36px 0,0 28px}}
+@keyframes commWavePulse{0%,100%{transform:scale(1);opacity:.32}50%{transform:scale(1.035);opacity:.68}}
+@keyframes proRingBreath{0%,100%{opacity:.88}50%{opacity:1}}
+@media(max-width:800px){.pro-view .pro-hero{padding:26px 22px!important}.pro-view .pro-hero h1{font-size:clamp(42px,9vw,64px)!important}.pro-view .pro-dashboard{justify-self:center!important}}
+@media(prefers-reduced-motion:reduce){.pro-view .pro-hero:before,.pro-view .pro-dashboard .pro-circle:before,.pro-view .pro-dashboard .pro-orbit{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+<section class="pro-view" id="proView">
+ <div class="pro-hero"><div><div class="eyebrow" style="color:#ff7b83">ECIT PRO · ALL-ACCESS MEMBERSHIP</div><h1 id="proHeroHeadline">Design the silicon.<br><span class="accent">Define what’s next.</span></h1><p id="proDomainDesc">One premium access layer for semiconductor learning, practice, projects and career preparation.</p><div class="pro-price-line"><strong>₹1999</strong><span>/ month</span><small>Cancel anytime</small></div><div class="pro-hero-actions"><a class="pro-btn pro-btn-primary" href="#signin">Start Pro <span aria-hidden="true">→</span></a><a class="pro-btn pro-btn-outline" href="mailto:ecit@example.com?subject=ECIT%20Pro%20Demo">Request a demo <span aria-hidden="true">↗</span></a></div><div class="pro-perks">✓ No ads　 ✓ Unlimited practice　 ✓ Pro profile badge</div></div><div class="pro-panel pro-dashboard"><div class="pro-dash-top"><span>PRO CONTROL CENTER</span><b><i></i> ACTIVE</b></div><div class="pro-circle"><span class="pro-wordmark">PRO</span><small>ACCESS</small><span class="pro-orbit"></span></div><div class="pro-stats"><div><strong>∞</strong><span>Practice</span></div><div><strong>01</strong><span>Mentor / mo</span></div><div><strong>24/7</strong><span>Learning</span></div></div><div class="pro-meter-list"><div><span>Learning</span><i><b style="width:92%"></b></i><strong>PRO</strong></div><div><span>Practice</span><i><b style="width:100%"></b></i><strong>UNLIMITED</strong></div><div><span>Career</span><i><b style="width:84%"></b></i><strong>PRO</strong></div></div></div></div>
+ <div class="pro-section"><div class="pro-head"><div><div class="eyebrow">01 / What you unlock</div><h2>Everything across ECIT.<br><span class="accent">One access layer.</span></h2></div><p>Pro is not a separate learning platform. It is the premium access layer across the ECIT engineering workflow.</p></div><div class="pro-grid"><article class="pro-benefit"><h3>01 · ALL-ACCESS LEARNING</h3><p id="proBenefit1">Access all semiconductor courses and advanced study material.</p></article><article class="pro-benefit"><h3>02 · UNLIMITED PRACTICE</h3><p>Access quizzes, exercises and assessments without standard limits.</p></article><article class="pro-benefit"><h3>03 · PROJECT LIBRARY</h3><p>Explore project guides, implementations and practical workflows.</p></article><article class="pro-benefit"><h3>04 · CAREER PREPARATION</h3><p>Unlock interview preparation and available career resources.</p></article><article class="pro-benefit"><h3>05 · TECHNICAL LIBRARY</h3><p>Full access to ECIT notes, references, papers and technical guides.</p></article><article class="pro-benefit"><h3>06 · EXCLUSIVE CONTENT</h3><p>Member-only material and new features as they become available.</p></article></div></div>
+ <div class="pro-section" id="proCompare"><div class="pro-head"><div><div class="eyebrow">02 / Free vs Pro</div><h2>See exactly<br><span class="accent">what changes.</span></h2></div><p>Compare public access with the all-access ECIT Pro membership.</p></div><div class="pro-compare"><div class="pro-switch"><button class="active" type="button" data-proplan="free">FREE</button><button type="button" data-proplan="pro">PRO</button></div><div class="pro-plans"><article class="pro-plan" id="ecitFree"><div class="plan-topline"><span>FREE</span><span>Explore</span></div><h3>Start learning</h3><p>Public ECIT content with standard availability.</p><ul><li>Public courses and material</li><li>Selected quizzes and practice</li><li>Public projects and resources</li><li>Open technical references</li></ul><a class="pro-card-btn pro-card-btn-light" href="#courses">Explore free <span aria-hidden="true">→</span></a></article><article class="pro-plan premium" id="ecitPremium"><div class="plan-topline"><span>PRO</span><span>Premium</span></div><h3>Go further</h3><p>One membership for all available ECIT content and features.</p><div class="compare-price"><strong>₹1999</strong><span>/ month</span></div><ul><li>All courses and learning paths</li><li>All quizzes and assessments</li><li>All projects and implementation resources</li><li>Full technical library access</li><li>Complete interview and career preparation</li></ul><a class="pro-card-btn pro-card-btn-pro" href="#signin">Choose Pro <span aria-hidden="true">→</span></a></article></div></div></div>
+ <div class="pro-section"><div class="pro-head"><div><div class="eyebrow">03 / Two engineering tracks</div><h2>One Pro account.<br><span class="accent">Focused access.</span></h2></div><p id="proTrackDesc">Switch the Semiconductor / Communication control in the header to view the matching Pro description.</p></div><div class="pro-grid"><article class="pro-benefit"><h3 id="proTrackTitle">SEMICONDUCTOR PRO</h3><p id="proTrackText">Advanced digital design, RTL, verification, semiconductor devices and VLSI implementation.</p></article><article class="pro-benefit"><h3>ALL-ACCESS WORKFLOW</h3><p>Learn concepts, practice skills, build projects and prepare for technical roles.</p></article><article class="pro-benefit"><h3>ONE MEMBERSHIP</h3><p>Pro access follows the active ECIT domain while retaining access to the full platform.</p></article></div></div>
+ <div class="pro-cta"><div class="eyebrow" style="color:#ff7b83">ECIT PRO</div><h2 style="font-size:clamp(28px,4vw,44px);line-height:1.1">Your engineering workspace.<br><span class="accent">With all-access learning.</span></h2><p>Membership pricing and account-based unlocking can be introduced when the platform is ready.</p><a class="pro-choose" href="#signin">Choose Pro <span aria-hidden="true">→</span></a></div>
+</section>
+<script>
+(function(){
+var E=window.ECIT;
+function applyPro(d){
+ var $=function(s){return document.querySelector(s)};
+  var ph=$('#proHeroHeadline'),pd=$('#proDomainDesc'),pb=$('#proBenefit1'),pt=$('#proTrackTitle'),px=$('#proTrackText'),pr=$('#proTrackDesc');
+  if(ph){ph.innerHTML=d==='comm'?'Connect beyond limits.<br><span class="accent">Shape what’s next.</span>':'Design the silicon.<br><span class="accent">Define what’s next.</span>'; }
+  if(pd){pd.textContent=d==='comm'?'One premium access layer for communication systems, wireless networks, signal processing, RF and HF research, practice and career preparation.':'One premium access layer for semiconductor devices, digital design, RTL, verification, VLSI projects and career preparation.';pb.textContent=d==='comm'?'Access all communication courses, signal-processing material, wireless and HF resources, and advanced study content.':'Access all semiconductor courses, RTL and VLSI learning paths, device material and advanced study content.';pt.textContent=d==='comm'?'COMMUNICATION PRO':'SEMICONDUCTOR PRO';px.textContent=d==='comm'?'Digital and wireless communications, DSP, RF systems, HF propagation, channel estimation and resilient networks.':'Digital design, RTL, verification, semiconductor devices, CMOS, fabrication and VLSI implementation.';pr.textContent=d==='comm'?'Explore Pro access for communication engineering, from signal processing and wireless systems to HF communication and network research.':'Explore Pro access for semiconductor engineering, from device fundamentals and digital design to verification and VLSI implementation.';}
+}
+E.onDomain(applyPro);
+})();
+(function(){
+document.querySelectorAll('.pro-plan .pro-card-btn').forEach(link=>link.addEventListener('click',event=>{const card=link.closest('.pro-plan');if(card&&!card.classList.contains('is-selected')){event.preventDefault();event.stopImmediatePropagation();}} ,true));
+document.querySelectorAll('.pro-switch button').forEach(btn=>btn.addEventListener('click',()=>{document.querySelectorAll('.pro-switch button').forEach(b=>{const active=b===btn;b.classList.toggle('active',active);b.setAttribute('aria-pressed',String(active));});const premium=btn.dataset.proplan==='pro';document.getElementById('ecitFree').classList.toggle('is-selected',!premium);document.getElementById('ecitPremium').classList.toggle('is-selected',premium);}));document.querySelectorAll('.pro-switch button').forEach(b=>b.setAttribute('aria-pressed',String(b.classList.contains('active'))));document.getElementById('ecitFree').classList.add('is-selected');document.querySelectorAll('.pro-plan').forEach(card=>{card.addEventListener('click',event=>{if(event.target.closest('a,button'))return;const plan=card.id==='ecitFree'?'free':'pro';const toggle=document.querySelector(`.pro-switch button[data-proplan="${plan}"]`);if(toggle)toggle.click();});card.setAttribute('tabindex','0');card.setAttribute('role','button');card.addEventListener('keydown',event=>{if(event.key==='Enter'||event.key===' '){event.preventDefault();const plan=card.id==='ecitFree'?'free':'pro';const toggle=document.querySelector(`.pro-switch button[data-proplan="${plan}"]`);if(toggle)toggle.click();}});});
+})();
+</script>
+</body>
+</html>

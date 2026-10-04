@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Prep Arena | ECIT</title>
+<style>
+:root{--ink:#171A1E;--red:#A90025;--white:#fff;--soft:#F3F4F5;--gray:#777;--serif:Georgia,"Times New Roman",serif;--sans:"Helvetica Neue",Arial,sans-serif;--s1:8px;--s2:16px;--s3:24px;--s4:48px;--s5:64px;--max:1400px}
+*{box-sizing:border-box;margin:0}
+body{font-family:var(--sans);color:var(--ink);line-height:1.6;background:var(--white);font-size:15px}
+a{color:inherit;text-decoration:none}
+:focus-visible{outline:3px solid var(--red);outline-offset:2px}
+.wrap{max-width:var(--max);margin:0 auto;padding:0 var(--s3)}
+section{padding:var(--s5) 0}
+h2,h3{font-family:var(--serif);font-weight:400;line-height:1.15}
+h2{font-size:clamp(1.8rem,2.6vw,2.5rem);margin-bottom:var(--s2)}
+.lead{max-width:62ch;color:#454a52}
+.acad{background:var(--soft)}
+.catgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(280px,100%),1fr));gap:var(--s4) var(--s3);margin-top:var(--s3)}
+.cat{border-top:3px solid var(--red);padding-top:var(--s2);transition:transform .3s}
+.cat:hover{transform:translateY(-4px)}
+.cat h3{font-size:1.4rem;margin-bottom:6px}
+.cat p{color:#4a4f56;font-size:.95rem;margin-bottom:8px}
+.cat ul{list-style:none;padding:0;font-size:.95rem}
+.cat li{padding:6px 0;border-top:1px solid #d9dbdd}
+.library-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:var(--s3)}
+.library-card{border:1px solid #d9dbdd;border-top:3px solid var(--red);padding:20px;background:#fff;transition:transform .3s,box-shadow .3s,border-color .3s}
+.library-card:hover{transform:translateY(-4px);box-shadow:0 14px 32px rgba(23,26,30,.14);border-color:var(--red)}
+.library-card h3{font-size:1.3rem;margin-bottom:8px}
+.library-card p{color:#4a4f56;font-size:.92rem;margin-bottom:12px}
+.more{color:var(--red);font-weight:600;border-bottom:2px solid transparent}
+.more:hover{border-color:var(--red)}
+.note{color:var(--gray);font-size:.85rem;margin-top:var(--s3)}
+@media(max-width:900px){.library-grid{grid-template-columns:1fr 1fr}}
+@media(max-width:600px){.library-grid{grid-template-columns:1fr}section{padding:48px 0}}
+</style></head><body>
+<section class="acad"><div class="wrap">
+ <h2>Prep Arena</h2>
+ <p class="lead">Practice sets, timed challenges and mock rounds for semiconductor and communication engineers.</p>
+ <div class="catgrid">
+  <div class="cat"><h3>Concept quizzes</h3><p>Short quizzes to check fundamentals.</p><ul><li>Digital design and CMOS</li><li>Signals and systems</li><li>Wireless fundamentals</li></ul></div>
+  <div class="cat"><h3>HDL challenges</h3><p>Timed problems with testbench checks.</p><ul><li>Verilog practice</li><li>SystemVerilog and assertions</li><li>FSM and datapath design</li></ul></div>
+  <div class="cat"><h3>Mock interviews</h3><p>Role-based technical rounds.</p><ul><li>RTL and verification</li><li>Physical design</li><li>RF, DSP and communication</li></ul></div>
+ </div>
+</div></section>
+<section><div class="wrap">
+ <h2>Preparation resources</h2>
+ <div class="library-grid">
+  <div class="library-card"><h3>Exam preparation</h3><p>Graduate entrance and university exam practice by topic.</p><a class="more" href="#courses">View courses</a></div>
+  <div class="library-card"><h3>Revision sheets</h3><p>Formulas, definitions and checklists from the Technical Library.</p><a class="more" href="#technical-library">Open library</a></div>
+  <div class="library-card"><h3>Placement drills</h3><p>Aptitude, technical and HR preparation for career readiness.</p><a class="more" href="#career-page">Career &amp; Placement</a></div>
+ </div>
+ <p class="note">Sample content: full question banks will be added as they are published.</p>
+</div></section>
+<script>
+function post(m){parent.postMessage(m,'*')}
+function h(){post({ecit:'height',h:document.documentElement.scrollHeight})}
+addEventListener('load',function(){post({ecit:'ready'});h()});addEventListener('resize',h);
+if(window.ResizeObserver)new ResizeObserver(h).observe(document.body);
+document.addEventListener('click',function(e){var a=e.target.closest('a[href^="#"]');if(a){e.preventDefault();post({ecit:'link',href:a.getAttribute('href')})}});
+document.addEventListener('pointerdown',function(){post({ecit:'tap'})});
+</script></body></html>

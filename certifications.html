@@ -1,0 +1,154 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Certifications | ECIT</title>
+<script>
+/* ECIT section shim: lets this file run inside the ECIT site frame (index.html) with the shared header.
+   Opened on its own, it sends the visitor to the full site. */
+(function(){
+ if(window.parent===window){location.replace('index.html#courses');return}
+ var q=/[?&]d=(semi|comm)/.exec(location.search),de=document.documentElement;
+ var E=window.ECIT={domain:q?q[1]:'semi',_l:[],onDomain:function(fn){this._l.push(fn);try{fn(this.domain)}catch(err){console.error(err)}}};
+ de.setAttribute('data-domain',E.domain);
+ function post(m){try{parent.postMessage(m,'*')}catch(err){}}
+ window.addEventListener('message',function(e){var m=e.data;if(!m||m.ecit!=='domain'||(m.domain!=='semi'&&m.domain!=='comm')||m.domain===E.domain)return;
+  E.domain=m.domain;de.setAttribute('data-domain',m.domain);E._l.forEach(function(fn){try{fn(m.domain)}catch(err){console.error(err)}})});
+ var last=0;
+ function size(){var h=Math.ceil(document.body.getBoundingClientRect().height);if(h&&h!==last){last=h;post({ecit:'height',h:h})}}
+ window.addEventListener('load',function(){size();post({ecit:'ready'})});
+ window.addEventListener('resize',size);
+ document.addEventListener('DOMContentLoaded',function(){
+  if(window.ResizeObserver)new ResizeObserver(size).observe(document.body);else setInterval(size,400);
+  size();
+ });
+ document.addEventListener('pointerdown',function(){post({ecit:'tap'})},true);
+ document.addEventListener('click',function(e){var a=e.target.closest&&e.target.closest('a[href^="#"]');if(!a)return;e.preventDefault();post({ecit:'link',href:a.getAttribute('href')})});
+})();
+</script>
+<style>
+/* Page basics shared with the ECIT shell, so this section looks the same inside the site frame. */
+:root{--ink:#171A1E;--red:#A90025;--white:#fff;--soft:#F3F4F5;--gray:#777;--serif:Georgia,"Times New Roman",serif;--sans:"Helvetica Neue",Arial,sans-serif;--s1:8px;--s2:16px;--s3:24px;--s4:48px;--s5:96px;--max:1240px}
+*{box-sizing:border-box;margin:0}
+html{-webkit-text-size-adjust:100%}
+body{overflow-wrap:break-word;font-family:var(--sans);color:var(--ink);line-height:1.6;background:var(--white)}
+img{display:block;width:100%;height:100%;object-fit:cover;background:#2a2f36}
+a{color:inherit;text-decoration:none}
+:focus-visible{outline:3px solid var(--red);outline-offset:2px}
+.wrap{max-width:var(--max);margin:0 auto;padding:0 var(--s3)}
+h1,h2,h3{font-family:var(--serif);font-weight:400;line-height:1.15}
+h2{font-size:clamp(2rem,4vw,3rem);margin-bottom:var(--s3)}
+.lead{max-width:62ch;color:#454a52;font-size:1.1rem}
+.btn{display:inline-block;padding:14px 26px;font-weight:600;border:2px solid var(--red);background:var(--red);color:#fff;cursor:pointer;font:inherit;font-weight:600;transition:background .2s,color .2s}
+.btn:hover{background:#fff;color:var(--red)}
+.more{color:var(--red);font-weight:600;border-bottom:2px solid transparent}
+.more:hover{border-color:var(--red)}
+/* Same desktop density as the ECIT shell (15px root on wide screens), so text sizes match the original site. */
+@media(min-width:1101px){
+ html{font-size:15px}
+ :root{--s5:64px;--max:1400px}
+ .lead{font-size:1rem}
+ h2{font-size:clamp(1.8rem,2.6vw,2.5rem);margin-bottom:var(--s2)}
+ .btn{padding:12px 22px}
+}
+/* The site frame sizes itself to this content, so sections must not fill the viewport. */
+section[class$="-view"]{display:block!important;min-height:0!important}
+</style>
+<style>
+
+.cert-view{min-height:calc(100vh - 78px);padding:58px max(24px,calc((100% - 1240px)/2)) 80px;background:#fff}
+.cert-view .eyebrow{font-size:12px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#A90025}
+.cert-view h1{font:400 clamp(2rem,4vw,3rem) Georgia,serif;margin:8px 0 12px}
+.cert-view .intro{max-width:760px;color:#555;margin-bottom:28px}
+.cert-view .toolbar{display:flex;flex-direction:column;gap:16px;margin-bottom:26px}
+.cert-view .filters{display:flex;flex-wrap:wrap;gap:8px}
+.cert-view .filters button{border:1px solid #d4d7da;background:#fff;padding:8px 14px;cursor:pointer;font:inherit}
+.cert-view .filters button.active,.cert-view .filters button:hover{background:#171A1E;color:#fff}
+.cert-view input{max-width:420px;width:100%;padding:12px 14px;border:1px solid #c8cbd0;font:inherit}
+.cert-view .grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:22px}
+.cert-view .card{display:flex;flex-direction:column;min-width:0;border:1px solid #e1e4e8;border-radius:16px;background:#fff;overflow:hidden;box-shadow:0 5px 18px rgba(20,28,38,.045);transition:transform .22s ease,box-shadow .22s ease}
+.cert-view .card:hover{transform:translateY(-4px);box-shadow:0 14px 32px rgba(20,28,38,.11)}
+.cert-view .thumb{--accent:#a90025;position:relative;isolation:isolate;display:flex;align-items:flex-end;min-height:145px;padding:18px 20px;color:#fff;background:linear-gradient(135deg,#20242b,#343943);overflow:hidden}
+.cert-view .thumb:before{content:"";position:absolute;z-index:-1;width:190px;height:190px;right:-34px;top:-88px;border:1px solid rgba(255,255,255,.2);border-radius:50%;box-shadow:0 0 0 18px rgba(255,255,255,.035),0 0 0 38px rgba(255,255,255,.025)}
+.cert-view .thumb:after{content:"";position:absolute;z-index:-1;width:100px;height:100px;right:34px;top:20px;border-radius:50%;background:radial-gradient(circle at 35% 35%,var(--accent),transparent 72%)}
+.cert-view .thumb-grid{position:absolute;inset:0;z-index:-1;opacity:.16;background-image:linear-gradient(rgba(255,255,255,.35) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.35) 1px,transparent 1px);background-size:24px 24px}
+.cert-view .thumb-domain{font-size:10px;letter-spacing:.15em;text-transform:uppercase;color:rgba(255,255,255,.78);font-weight:700;margin-bottom:8px}
+.cert-view .thumb-code{font:700 34px/1 Arial,sans-serif;letter-spacing:-.06em}
+.cert-view .thumb-mark{position:absolute;right:20px;bottom:20px;width:42px;height:42px;border:1px solid rgba(255,255,255,.35);border-radius:12px;display:grid;place-items:center;background:rgba(255,255,255,.08);font-size:19px}
+.cert-view .card-body{padding:20px 21px 16px;display:flex;flex-direction:column;flex:1}
+.cert-view .tag{display:inline-flex;align-self:flex-start;font-size:10px;text-transform:uppercase;letter-spacing:.1em;color:#9b0022;font-weight:700;background:#fff2f4;border:1px solid #f4d8de;border-radius:999px;padding:5px 9px}
+.cert-view .card h2{font:650 18px/1.3 Arial,sans-serif;letter-spacing:-.025em;margin:12px 0 8px;color:#171a1e}
+.cert-view .meta{font-size:11px;color:#777;font-weight:600;margin-bottom:10px}
+.cert-view .card p{font-size:13px;line-height:1.6;color:#5b6068;margin-bottom:12px}
+.cert-view .card ul{padding-left:17px;font-size:12px;line-height:1.6;color:#454a52;margin-bottom:13px}
+.cert-view .project{border-left:3px solid var(--red);padding:10px 12px;background:#f8f8f9;font-size:12px;line-height:1.55;color:#454a52;margin-top:auto}
+.cert-view .project strong{display:block;color:#202329;margin-bottom:4px;font-size:11px;text-transform:uppercase;letter-spacing:.06em}
+.cert-view .card-footer{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:15px 20px 18px;border-top:1px solid #eceef0;background:#fcfcfd}
+.cert-view .fee-label{display:block;font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:#777;font-weight:700;margin-bottom:3px}
+.cert-view .fee-value{font-size:19px;font-weight:750;color:#171a1e;white-space:nowrap}
+.cert-view .enrol-btn{display:inline-flex;align-items:center;justify-content:center;padding:10px 14px;border-radius:9px;background:#a90025;color:#fff;font-size:12px;font-weight:700;white-space:nowrap}
+.cert-view .enrol-btn:hover{background:#85001d}
+.cert-view .empty{display:none;color:#777;padding:20px 0}
+@media(min-width:1101px){.cert-view{padding-top:48px}.cert-view .grid{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media(max-width:900px){.cert-view .grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:600px){.cert-view .grid{grid-template-columns:1fr}.cert-view .card-footer{padding:14px 17px}.cert-view .thumb{min-height:135px}}
+
+</style>
+</head>
+
+<body>
+<section class="cert-view" id="certificationsView">
+ <div class="eyebrow">ECIT Academics · Skill Credentials</div>
+ <h1>Certification programs</h1>
+ <p class="intro" id="certIntro">Build practical foundations through beginner-friendly certification programs in semiconductor technology and communication engineering.</p>
+ <div class="toolbar">
+  <input id="certSearch" type="search" placeholder="Search certification programs..." aria-label="Search certification programs">
+ </div>
+ <div class="grid" id="certGrid"></div>
+ <p class="empty" id="certEmpty">No programs match this search.</p>
+</section>
+<script>
+(function(){
+ if(window.parent===window){location.replace('index.html#certifications');return}
+ var programs=[{"domain": "semi", "title": "Digital Electronics Fundamentals", "category": "Digital Design", "duration": "10 hours", "price": 299, "overview": "Build a strong foundation in digital logic and the design of reliable digital systems.", "topics": ["Number systems and Boolean algebra", "Combinational and sequential logic", "Timing, counters, and FSMs"], "project": "Configurable Digital Controller: design a multi-mode controller with programmable timing, state transitions, reset recovery, and fault handling. Verify corner cases with a testbench and report latency and resource estimates."}, {"domain": "semi", "title": "Semiconductor Device Fundamentals", "category": "Devices", "duration": "15 hours", "price": 399, "overview": "Understand how semiconductor devices behave and how their characteristics influence circuit design.", "topics": ["Semiconductor physics and PN junctions", "Diode and MOSFET characteristics", "Threshold voltage, leakage, and temperature effects"], "project": "Device Characterization Study: simulate diode and MOSFET I–V curves, extract key parameters, compare temperature and bias conditions, and recommend operating regions based on measured results."}, {"domain": "semi", "title": "Verilog HDL Programming", "category": "Digital Design", "duration": "15 hours", "price": 399, "overview": "Learn to describe, simulate, and verify digital hardware using synthesizable Verilog.", "topics": ["Modules, data types, and operators", "Combinational and sequential coding", "Testbenches and simulation debugging"], "project": "Parameterized Synchronous FIFO: implement configurable depth and width, full/empty flags, simultaneous read/write behavior, reset handling, and a randomized testbench with coverage of boundary cases."}, {"domain": "semi", "title": "RTL Design Fundamentals", "category": "Digital Design", "duration": "20 hours", "price": 499, "overview": "Translate design requirements into clean RTL and validate functionality through structured verification.", "topics": ["RTL coding and design partitioning", "FSMs, datapaths, and control logic", "Simulation, linting, and synthesis awareness"], "project": "Multi-Cycle RISC-V Subset Processor: implement a small instruction subset with a register file, ALU, controller, and datapath. Verify instruction execution and document control sequencing and limitations."}, {"domain": "semi", "title": "Introduction to VLSI Design Flow", "category": "Physical Design", "duration": "20 hours", "price": 499, "overview": "Explore the journey from RTL to physical implementation and understand core design trade-offs.", "topics": ["Synthesis and constraints", "Floorplanning, placement, and clock-tree concepts", "Routing, timing, and signoff overview"], "project": "RTL-to-GDSII PPA Study: take a manageable IP block through available synthesis and physical-design stages. Compare at least two constraint or design variants and report area, timing, and power estimates."}, {"domain": "semi", "title": "CMOS Technology Fundamentals", "category": "Devices", "duration": "15 hours", "price": 399, "overview": "Connect transistor operation with CMOS logic behavior, power, and delay.", "topics": ["MOS operation and CMOS inverter", "Logic-gate structures and sizing", "Dynamic power, delay, and load effects"], "project": "CMOS Cell Power–Delay Optimization: simulate inverter and logic-cell variants, sweep transistor sizing and load capacitance, and compare delay, power, and noise-margin trade-offs."}, {"domain": "semi", "title": "Computer Architecture and RISC-V Basics", "category": "Digital Design", "duration": "20 hours", "price": 499, "overview": "Understand processor organization and how instructions move through a simple RISC-V datapath.", "topics": ["ISA, registers, and instruction formats", "Datapath, control, and memory hierarchy", "Pipeline concepts and performance metrics"], "project": "RISC-V Datapath and Performance Analysis: model a small datapath, trace representative instruction sequences, calculate CPI, and analyze stalls and dependencies using a constrained pipeline model."}, {"domain": "comm", "title": "Communication Systems Fundamentals", "category": "Communication", "duration": "10 hours", "price": 299, "overview": "Understand the building blocks of a communication link and how noise affects information transfer.", "topics": ["Signals, bandwidth, and noise", "Transmitter and receiver blocks", "Baseband link concepts and performance metrics"], "project": "End-to-End Baseband Link: build a source-to-destination model with modulation, channel noise, detection, and BER measurement. Sweep SNR and compare results against expected behavior."}, {"domain": "comm", "title": "Analog Communication Fundamentals", "category": "Analog", "duration": "15 hours", "price": 399, "overview": "Study analog modulation and evaluate the quality of received signals under noise.", "topics": ["AM, FM, and PM principles", "Modulator and demodulator models", "Bandwidth, noise, and output SNR"], "project": "AM/FM System Comparison: model transmitter and receiver chains, vary modulation parameters and noise, and compare bandwidth, output SNR, distortion, and demodulation quality."}, {"domain": "comm", "title": "Digital Communication Fundamentals", "category": "Digital", "duration": "15 hours", "price": 399, "overview": "Explore digital modulation and quantify link reliability under common channel models.", "topics": ["Sampling and quantization overview", "BPSK, QPSK, and QAM", "AWGN and fading-channel basics"], "project": "Modulation BER Benchmark: implement BPSK, QPSK, and QAM over AWGN and Rayleigh channels. Compare simulated and theoretical BER where applicable and determine SNR for a target error rate."}, {"domain": "comm", "title": "Digital Signal Processing Basics", "category": "Signal Processing", "duration": "20 hours", "price": 499, "overview": "Apply discrete-time signal analysis and filtering to practical noisy-signal problems.", "topics": ["Discrete-time signals and convolution", "Fourier analysis and digital filters", "Adaptive filtering fundamentals"], "project": "Adaptive Noise Cancellation: design FIR/IIR baselines and an LMS canceller. Compare SNR improvement, convergence, sensitivity to step size, and computational cost on noisy test signals."}, {"domain": "comm", "title": "RF and Antenna Fundamentals", "category": "RF & Antennas", "duration": "15 hours", "price": 399, "overview": "Learn core RF and antenna concepts and evaluate how design parameters affect radiation.", "topics": ["Waves, impedance, and transmission lines", "Antenna parameters and radiation patterns", "Array concepts and measurement basics"], "project": "Antenna Array Pattern Optimization: model a linear array and sweep element spacing, phase, and array size. Evaluate beamwidth, sidelobe level, and steering range against stated design targets."}, {"domain": "comm", "title": "Wireless Communication and 5G Basics", "category": "Wireless", "duration": "20 hours", "price": 499, "overview": "Build a foundational understanding of cellular wireless links and key 5G radio concepts.", "topics": ["Wireless channels and fading", "OFDM, MIMO, and equalization", "5G architecture and performance measures"], "project": "5G-Inspired OFDM-MIMO Link: simulate a simplified link with channel estimation and equalization. Evaluate BER, throughput, and spectral efficiency across channel and antenna configurations."}, {"domain": "comm", "title": "HF and Ionospheric Communication Basics", "category": "Wireless", "duration": "20 hours", "price": 499, "overview": "Understand HF skywave propagation and make frequency choices under changing ionospheric conditions.", "topics": ["Ionospheric layers, TEC, and skywave", "MUF and HF link planning", "Link quality and adaptive frequency selection"], "project": "Ionosphere-Aware HF Link Planner: use synthetic or available propagation data to estimate MUF, assess candidate frequencies, and implement a frequency-selection strategy. Compare fixed-frequency and adaptive approaches using link-quality metrics."}];
+ var grid=document.getElementById('certGrid'),search=document.getElementById('certSearch'),empty=document.getElementById('certEmpty');
+ /* The parent ECIT switch is the only domain control on this page. */
+ var E=window.ECIT;
+ var domain=(E&&E.domain)||'semi';
+ if(E&&typeof E.onDomain==='function'){
+  E.onDomain(function(next){
+   if(next!=='semi'&&next!=='comm')return;
+   domain=next;
+   render();
+  });
+ }
+ function render(){
+  var q=search.value.trim().toLowerCase();
+  var rows=programs.filter(function(p){
+   return (domain==='all'||p.domain===domain)&&(!q||[p.title,p.category,p.overview,p.topics.join(' '),p.project].join(' ').toLowerCase().includes(q));
+  });
+  grid.innerHTML=rows.map(function(p){
+   var initials=p.title.split(/[\s&/-]+/).filter(Boolean).map(function(w){return w.charAt(0)}).join('').slice(0,4).toUpperCase();
+   var label=p.domain==='semi'?'SEMICONDUCTOR':'COMMUNICATION';
+   var accent=p.domain==='semi'?'#a90025':'#347d82';
+   var topicList=p.topics.map(function(t){return '<li>'+t+'</li>'}).join('');
+   return '<article class="card">'+
+    '<div class="thumb" style="--accent:'+accent+'"><span class="thumb-grid"></span><div><div class="thumb-domain">'+label+' · CERTIFICATE</div><div class="thumb-code">'+initials+'</div></div><span class="thumb-mark" aria-hidden="true">✦</span></div>'+
+    '<div class="card-body"><span class="tag">Beginner level</span><h2>'+p.title+'</h2><div class="meta">'+p.duration+' &nbsp;·&nbsp; Assessment-based</div><p>'+p.overview+'</p><ul>'+topicList+'</ul><div class="project"><strong>Capstone mini-project</strong>'+p.project+'</div></div>'+
+    '<div class="card-footer"><div><span class="fee-label">Program fee</span><span class="fee-value">₹'+p.price+'</span></div><a class="enrol-btn" href="#enrol" data-program="'+p.title.replace(/"/g,'&quot;')+'">Enquire to enrol →</a></div>'+
+   '</article>';
+  }).join('');
+  empty.style.display=rows.length?'none':'block';
+ }
+ search.addEventListener('input',render);
+ grid.addEventListener('click',function(e){
+  var a=e.target.closest&&e.target.closest('.enrol-btn');if(!a)return;
+  e.preventDefault();
+  try{parent.postMessage({ecit:'enrol',course:a.getAttribute('data-program'),type:'certification'},'*')}catch(err){}
+ });
+ render();
+})();
+</script>
+</body>
+</html>
